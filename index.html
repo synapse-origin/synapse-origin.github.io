@@ -1403,6 +1403,11 @@
             }
         }
 
+        /* Hide mobile toggle on desktop */
+        .nav-mobile-toggle {
+            display: none;
+        }
+
         @media (max-width: 768px) {
             nav .container {
                 flex-wrap: wrap;
@@ -1413,10 +1418,16 @@
                 display: none;
             }
 
-            .nav-mobile {
+            /* Show mobile toggle on mobile */
+            .nav-mobile-toggle {
                 display: flex;
                 align-items: center;
                 gap: 1rem;
+            }
+            
+            .nav-cta-mobile {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
             }
 
             .problems-grid,
@@ -1489,7 +1500,8 @@
                 </li>
                 <li><a href="#commencer" class="nav-cta">Démarrer →</a></li>
             </ul>
-            <div class="nav-mobile">
+            <!-- Mobile: theme toggle + CTA (visible only on mobile) -->
+            <div class="nav-mobile-toggle">
                 <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme">
                     <div class="toggle-track">
                         <div class="toggle-knob">
@@ -1507,7 +1519,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="#commencer" class="nav-cta">Démarrer →</a>
+                <a href="#commencer" class="nav-cta nav-cta-mobile">Démarrer →</a>
             </div>
         </div>
     </nav>
@@ -1519,9 +1531,9 @@
                 <div class="hero-badges">
                     <span class="badge accent">
                         <span class="badge-dot"></span>
-                        MVP Opérationnel
+                        V1 Opérationnelle
                     </span>
-                    <span class="badge">Open Source • v0.1</span>
+                    <span class="badge">Open Source • v1.0</span>
                     <span class="badge">🇪🇺 Made in Europe</span>
                 </div>
                 <h1>L'<span>Agilité Cognitive</span> pour l'ère de l'IA</h1>
@@ -1578,7 +1590,7 @@
                     </div>
                     <div class="flow-metrics">
                         <div class="metric-item">
-                            <div class="metric-value">2</div>
+                            <div class="metric-value">4</div>
                             <div class="metric-label">Agents actifs</div>
                         </div>
                         <div class="metric-item">
@@ -1682,14 +1694,14 @@
                 <h3>Simulation Agent</h3>
                 <div class="subtitle">Anticipation</div>
                 <p>Génère 3 à 5 scénarios avec probabilités pour chaque décision majeure. Décidez en connaissance de cause.</p>
-                <span class="agent-tag progress">🔄 En développement</span>
+                <span class="agent-tag active">✅ Opérationnel</span>
             </div>
             <div class="agent-card">
                 <div class="agent-icon">🔗</div>
                 <h3>Coordination Agent</h3>
                 <div class="subtitle">Optimisation des flux</div>
                 <p>Détecte les blocages, suggère des réorganisations, optimise la collaboration sans micro-management.</p>
-                <span class="agent-tag">📅 Planifié</span>
+                <span class="agent-tag active">✅ Opérationnel</span>
             </div>
         </div>
     </section>
@@ -1875,11 +1887,31 @@
                     </li>
                     <li>
                         <span class="status-icon done">✓</span>
-                        Dashboard Métriques Cognitives
+                        Simulation Agent (scénarios probabilistes)
                     </li>
                     <li>
                         <span class="status-icon done">✓</span>
-                        Ethics Compliance System
+                        Coordination Agent (détection blocages)
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Dashboard Métriques Cognitives (11 métriques)
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Ethics Compliance System (audits éthiques)
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        API Gateway TypeScript/Fastify
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Frontend React complet
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Hiérarchie Intent (Org → Équipe)
                     </li>
                     <li>
                         <span class="status-icon done">✓</span>
@@ -1892,23 +1924,19 @@
                 </ul>
             </div>
             <div class="status-card">
-                <h3>🔄 En cours & Planifié</h3>
+                <h3>🔄 Prochaines étapes</h3>
                 <ul class="status-list">
                     <li>
                         <span class="status-icon progress">◐</span>
-                        Migration API Gateway (TypeScript/Fastify)
-                    </li>
-                    <li>
-                        <span class="status-icon progress">◐</span>
-                        Simulation Agent
+                        Recherche organisations pilotes
                     </li>
                     <li>
                         <span class="status-icon planned">○</span>
-                        Coordination Agent
+                        Validation terrain (Q2-Q3 2026)
                     </li>
                     <li>
                         <span class="status-icon planned">○</span>
-                        Organisations pilotes (Q2-Q3 2026)
+                        Publication académique
                     </li>
                     <li>
                         <span class="status-icon planned">○</span>

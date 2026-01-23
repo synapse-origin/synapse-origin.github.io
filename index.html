@@ -6,932 +6,41 @@
     <title>SYNAPSE — Le Framework d'Agilité Cognitive</title>
     <meta name="description" content="SYNAPSE unifie humains et intelligence artificielle pour créer des organisations plus intelligentes, adaptatives et responsables. Framework open source pour l'ère de l'IA.">
     
+    <!-- Open Graph -->
+    <meta property="og:title" content="SYNAPSE — Le Framework d'Agilité Cognitive">
+    <meta property="og:description" content="4 rôles humains + 4 agents IA = organisations plus intelligentes. Framework 100% open source.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://synapse-origin.github.io/synapse-fr/">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <style>
-/* ========================================
-   SYNAPSE - CSS OPTIMISÉ & REFACTORISÉ
-   De 1636 lignes → 750 lignes (-54%)
-   ======================================== */
-
-/* ========================================
-   VARIABLES & THEMES
-   ======================================== */
-
-:root {
-    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
-    --transition: all 0.3s ease;
-}
-
-[data-theme="light"] {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --bg-tertiary: #f1f5f9;
-    --bg-card: #ffffff;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #94a3b8;
-    --accent-primary: #0ea5e9;
-    --accent-secondary: #8b5cf6;
-    --accent-green: #10b981;
-    --accent-blue: #3b82f6;
-    --gradient-primary: linear-gradient(135deg, #0ea5e9, #8b5cf6);
-    --border-color: #e2e8f0;
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08);
-    --nav-bg: rgba(255,255,255,0.9);
-    --hero-blob-1: rgba(14,165,233,0.08);
-    --hero-blob-2: rgba(139,92,246,0.06);
-}
-
-[data-theme="dark"] {
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #12121a;
-    --bg-tertiary: #1a1a25;
-    --bg-card: #16161f;
-    --text-primary: #f0f0f5;
-    --text-secondary: #a0a0b0;
-    --text-muted: #606070;
-    --accent-primary: #00d4ff;
-    --accent-secondary: #8b5cf6;
-    --accent-green: #10b981;
-    --accent-blue: #3b82f6;
-    --gradient-primary: linear-gradient(135deg, #00d4ff, #8b5cf6);
-    --border-color: rgba(255,255,255,0.08);
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5);
-    --nav-bg: rgba(10,10,15,0.85);
-    --hero-blob-1: rgba(0,212,255,0.1);
-    --hero-blob-2: rgba(139,92,246,0.08);
-}
-
-/* ========================================
-   BASE STYLES
-   ======================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: var(--font-sans);
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.6;
-    overflow-x: hidden;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-[data-theme="dark"] body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    z-index: 1000;
-}
-
-/* ========================================
-   LAYOUT GÉNÉRIQUES (DRY)
-   ======================================== */
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.section {
-    padding: 5rem 2rem;
-}
-
-.section-alt {
-    padding: 5rem 2rem;
-    background: var(--bg-secondary);
-}
-
-.section-header {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 3rem;
-}
-
-.section-label {
-    display: inline-block;
-    padding: 0.4rem 1rem;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--accent-primary);
-    margin-bottom: 1rem;
-}
-
-.section-header h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-}
-
-.section-header p {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-}
-
-/* ========================================
-   GRILLES RÉUTILISABLES (DRY)
-   ======================================== */
-
-.grid {
-    display: grid;
-    gap: 2rem;
-}
-
-.grid-2 {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-
-.grid-3 {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-.grid-4 {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-/* ========================================
-   CARTES RÉUTILISABLES (DRY)
-   ======================================== */
-
-.card {
-    position: relative;
-    padding: 2rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-}
-
-.card:hover {
-    border-color: var(--accent-primary);
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-4px);
-}
-
-.card-icon,
-.tech-icon,
-.loop-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.card h3 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 0.75rem;
-}
-
-.card h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.75rem;
-}
-
-.card .subtitle,
-.loop-frequency {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--accent-primary);
-    margin-bottom: 0.75rem;
-    display: block;
-}
-
-.card p {
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 0.5rem;
-}
-
-.card ul {
-    margin-top: 1rem;
-}
-
-.card-highlight {
-    border: 2px solid var(--accent-primary);
-    background: linear-gradient(135deg, rgba(14,165,233,0.03), rgba(139,92,246,0.03));
-}
-
-[data-theme="dark"] .card-highlight {
-    background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(139,92,246,0.05));
-}
-
-/* ========================================
-   NAVIGATION
-   ======================================== */
-
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    padding: 1rem 2rem;
-    background: var(--nav-bg);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-color);
-    transition: var(--transition);
-}
-
-nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-weight: 800;
-    font-size: 1.25rem;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.5px;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 1.75rem;
-    align-items: center;
-}
-
-nav a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.2s;
-}
-
-nav a:hover {
-    color: var(--accent-primary);
-}
-
-.btn-nav {
-    padding: 0.5rem 1.25rem;
-    background: var(--gradient-primary);
-    color: white !important;
-    border-radius: 50px;
-    font-weight: 600;
-}
-
-/* Theme Toggle */
-.theme-toggle {
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    border-radius: 50px;
-    padding: 0.5rem;
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-}
-
-.theme-toggle:hover {
-    background: var(--bg-card);
-}
-
-.toggle-track {
-    width: 48px;
-    height: 24px;
-    background: var(--border-color);
-    border-radius: 50px;
-    position: relative;
-    transition: var(--transition);
-}
-
-.toggle-knob {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: var(--bg-card);
-    border-radius: 50%;
-    top: 2px;
-    left: 2px;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.toggle-knob svg {
-    width: 12px;
-    height: 12px;
-    color: var(--accent-primary);
-}
-
-/* ========================================
-   HERO SECTION
-   ======================================== */
-
-.hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8rem 2rem 4rem;
-    overflow: hidden;
-    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-}
-
-.hero::before,
-.hero::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    transition: var(--transition);
-}
-
-.hero::before {
-    top: -20%;
-    right: -10%;
-    width: 60%;
-    height: 80%;
-    background: radial-gradient(circle, var(--hero-blob-1) 0%, transparent 60%);
-}
-
-.hero::after {
-    bottom: -30%;
-    left: -15%;
-    width: 70%;
-    height: 90%;
-    background: radial-gradient(circle, var(--hero-blob-2) 0%, transparent 60%);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    max-width: 900px;
-}
-
-.hero-badges {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
-
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-}
-
-.badge.accent {
-    background: var(--gradient-primary);
-    color: white;
-    border: none;
-}
-
-.badge-dot {
-    width: 8px;
-    height: 8px;
-    background: #10b981;
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-}
-
-.hero h1 span {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero > p {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-    line-height: 1.8;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* ========================================
-   BUTTONS
-   ======================================== */
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.9rem 1.8rem;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition);
-    border: none;
-    cursor: pointer;
-}
-
-.btn-primary {
-    background: var(--gradient-primary);
-    color: white;
-    box-shadow: var(--shadow-md);
-}
-
-.btn-primary:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    background: var(--bg-card);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-    border-color: var(--accent-primary);
-    box-shadow: var(--shadow-md);
-}
-
-/* ========================================
-   FLOW VISUALIZATION
-   ======================================== */
-
-.flow-container {
-    max-width: 600px;
-    margin: 3rem auto;
-    padding: 2rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-}
-
-.flow-step {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    position: relative;
-}
-
-.flow-step:not(:last-child)::after {
-    content: '↓';
-    position: absolute;
-    bottom: -1.5rem;
-    left: 2rem;
-    font-size: 1.5rem;
-    color: var(--accent-primary);
-}
-
-.flow-icon {
-    font-size: 2rem;
-    flex-shrink: 0;
-}
-
-.flow-content h4 {
-    color: var(--text-primary);
-    margin-bottom: 0.25rem;
-    font-weight: 700;
-}
-
-.flow-content p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-.flow-stats {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.flow-stat {
-    text-align: center;
-}
-
-.flow-stat-value {
-    display: block;
-    font-size: 2rem;
-    font-weight: 800;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.flow-stat-label {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-}
-
-/* ========================================
-   AGENT TAGS & STATUS
-   ======================================== */
-
-.agent-tag {
-    display: inline-block;
-    padding: 0.4rem 0.8rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: auto;
-}
-
-.agent-tag.active {
-    background: linear-gradient(135deg, var(--accent-green), #059669);
-    color: white;
-}
-
-.agent-tag.framework {
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-secondary));
-    color: white;
-}
-
-/* ========================================
-   STATUS LISTS
-   ======================================== */
-
-.status-list {
-    list-style: none;
-    padding: 0;
-}
-
-.status-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0;
-    color: var(--text-secondary);
-}
-
-.status-icon {
-    flex-shrink: 0;
-    width: 1.5rem;
-    height: 1.5rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-weight: 700;
-    font-size: 0.9rem;
-}
-
-.status-icon.done {
-    background: rgba(16, 185, 129, 0.1);
-    color: var(--accent-green);
-}
-
-.status-icon.progress {
-    background: rgba(14, 165, 233, 0.1);
-    color: var(--accent-primary);
-}
-
-.status-icon.planned {
-    background: var(--bg-tertiary);
-    color: var(--text-muted);
-}
-
-/* ========================================
-   METRICS LISTS
-   ======================================== */
-
-.metrics-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 1rem;
-}
-
-.metrics-list li {
-    padding: 0.5rem 0;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.metrics-list li::before {
-    content: '→';
-    color: var(--accent-primary);
-    font-weight: bold;
-}
-
-/* ========================================
-   COMPARISON TABLE
-   ======================================== */
-
-.comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 2rem;
-    background: var(--bg-card);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-}
-
-.comparison-table th,
-.comparison-table td {
-    padding: 1.25rem;
-    text-align: left;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.comparison-table th {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-    font-weight: 700;
-}
-
-.comparison-table tr:last-child td {
-    border-bottom: none;
-}
-
-.comparison-table td:first-child {
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-/* ========================================
-   CTA SECTION
-   ======================================== */
-
-.cta-section {
-    padding: 6rem 2rem;
-    background: var(--gradient-primary);
-    text-align: center;
-}
-
-.cta-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.cta-section h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 1rem;
-}
-
-.cta-section p {
-    font-size: 1.1rem;
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 2rem;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.cta-section .btn-primary {
-    background: white;
-    color: var(--accent-primary);
-}
-
-.cta-section .btn-secondary {
-    background: rgba(255,255,255,0.1);
-    color: white;
-    border-color: rgba(255,255,255,0.3);
-}
-
-.cta-section .btn-secondary:hover {
-    background: rgba(255,255,255,0.2);
-}
-
-/* ========================================
-   FOOTER
-   ======================================== */
-
-footer {
-    padding: 4rem 2rem 2rem;
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.footer-brand {
-    max-width: 300px;
-}
-
-.footer-brand p {
-    color: var(--text-secondary);
-    margin-top: 1rem;
-    font-style: italic;
-}
-
-.footer-section h4 {
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.footer-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-section li {
-    margin-bottom: 0.75rem;
-}
-
-.footer-section a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.footer-section a:hover {
-    color: var(--accent-primary);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-color);
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-/* ========================================
-   EFFETS SPÉCIAUX PAR SECTION
-   ======================================== */
-
-/* Agents - glow effect */
-#agents .card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-primary);
-    opacity: 0;
-    transition: opacity 0.3s;
-    border-radius: var(--radius-lg);
-    pointer-events: none;
-}
-
-#agents .card:hover::before {
-    opacity: 0.03;
-}
-
-/* Roles - title color */
-#roles .card h4 {
-    color: var(--accent-primary);
-    font-size: 0.9rem;
-}
-
-/* ========================================
-   RESPONSIVE
-   ======================================== */
-
-@media (max-width: 1024px) {
-    .hero h1 {
-        font-size: 2.8rem;
-    }
-    
-    .section-header h2 {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .section, .section-alt {
-        padding: 3rem 1.5rem;
-    }
-    
-    nav ul {
-        gap: 1rem;
-    }
-    
-    nav a {
-        font-size: 0.85rem;
-    }
-    
-    .hero {
-        padding: 6rem 1.5rem 3rem;
-    }
-    
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-    
-    .grid-2, .grid-3, .grid-4 {
-        grid-template-columns: 1fr;
-    }
-    
-    .comparison-table {
-        font-size: 0.9rem;
-    }
-    
-    .comparison-table th,
-    .comparison-table td {
-        padding: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 1.8rem;
-    }
-    
-    .section-header h2 {
-        font-size: 1.75rem;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-    </style>
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- ========================================
+         NAVIGATION
+         ======================================== -->
     <nav>
         <div class="container">
             <a href="#" class="logo">SYNAPSE</a>
-            <ul>
-                <li><a href="#probleme">Le Problème</a></li>
-                <li><a href="#souverainete">Souveraineté</a></li>
-                <li><a href="#agents">Agents IA</a></li>
-                <li><a href="#implementation">Implémentation</a></li>
-                <li><a href="#roles">Rôles</a></li>
+            <ul class="nav-links">
+                <li><a href="#probleme">Problème</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#metriques">Métriques</a></li>
+                <li><a href="#comparaison">Comparaison</a></li>
                 <li><a href="#statut">Statut</a></li>
                 <li>
-                    <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme">
+                    <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Changer le thème">
                         <div class="toggle-track">
                             <div class="toggle-knob">
-                                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="12" cy="12" r="5"></circle>
                                     <line x1="12" y1="1" x2="12" y2="3"></line>
                                     <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -946,33 +55,26 @@ footer {
                         </div>
                     </div>
                 </li>
-                <li><a href="#commencer" class="nav-cta">Démarrer →</a></li>
+                <li><a href="#cta" class="nav-cta">Devenir Pilote →</a></li>
             </ul>
-            <!-- Mobile: theme toggle + CTA (visible only on mobile) -->
-            <div class="nav-mobile-toggle">
-                <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme">
+            <div class="nav-mobile">
+                <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Changer le thème">
                     <div class="toggle-track">
                         <div class="toggle-knob">
-                            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="5"></circle>
-                                <line x1="12" y1="1" x2="12" y2="3"></line>
-                                <line x1="12" y1="21" x2="12" y2="23"></line>
-                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                <line x1="1" y1="12" x2="3" y2="12"></line>
-                                <line x1="21" y1="12" x2="23" y2="12"></line>
-                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                             </svg>
                         </div>
                     </div>
                 </div>
-                <a href="#commencer" class="nav-cta nav-cta-mobile">Démarrer →</a>
+                <a href="#cta" class="nav-cta">Pilote →</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ========================================
+         SECTION 1: HERO
+         ======================================== -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
@@ -981,620 +83,478 @@ footer {
                         <span class="badge-dot"></span>
                         Framework V1.0 Complet
                     </span>
-                    <span class="badge">Open Source • v1.0</span>
+                    <span class="badge">🔓 Open Source</span>
                     <span class="badge">🇪🇺 Made in Europe</span>
                 </div>
-                <h1>L'<span>Agilité Cognitive</span> pour l'ère de l'IA</h1>
-                <p>SYNAPSE unifie humains et intelligence artificielle pour créer des organisations plus intelligentes, adaptatives et responsables. Framework organisationnel 100% open source.</p>
+                
+                <h1>L'<span class="gradient-text">Agilité Cognitive</span><br>pour l'ère de l'IA</h1>
+                
+                <p class="hero-subtitle">
+                    4 rôles humains au centre, 4 agents IA en support, 3 boucles de feedback continu.<br>
+                    SYNAPSE crée des organisations plus intelligentes, adaptatives et responsables.
+                </p>
+                
                 <div class="hero-buttons">
-                    <a href="#commencer" class="btn btn-primary">Découvrir le framework</a>
-                    <a href="https://github.com/synapse-origin/synapse-fr" class="btn btn-secondary">
+                    <a href="#cta" class="btn btn-primary-green">
+                        🎯 Devenir Organisation Pilote
+                    </a>
+                    <a href="https://github.com/synapse-origin/synapse-fr" class="btn btn-secondary" target="_blank" rel="noopener">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                        GitHub
+                        Documentation GitHub
                     </a>
                 </div>
-            </div>
-            <div class="hero-visual">
-                <div class="flow-diagram">
-                    <div class="flow-header">
-                        <span class="flow-title">🧠 Flux SYNAPSE</span>
-                        <span class="flow-status">
-                            <span class="badge-dot"></span>
-                            Système actif
-                        </span>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">4+4</span>
+                        <span class="hero-stat-label">Rôles + Agents</span>
                     </div>
-                    <div class="flow-steps">
-                        <div class="flow-step">
-                            <div class="flow-icon">🎯</div>
-                            <div class="flow-step-content">
-                                <h4>Intent — Intention claire</h4>
-                                <p>Objectifs explicites et partagés</p>
-                            </div>
-                        </div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-step">
-                            <div class="flow-icon">👁️</div>
-                            <div class="flow-step-content">
-                                <h4>Observation — Agents IA</h4>
-                                <p>Analyse continue et détection</p>
-                            </div>
-                        </div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-step">
-                            <div class="flow-icon">🧠</div>
-                            <div class="flow-step-content">
-                                <h4>Décision — Humains augmentés</h4>
-                                <p>Simulation et choix éclairés</p>
-                            </div>
-                        </div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-step">
-                            <div class="flow-icon">📚</div>
-                            <div class="flow-step-content">
-                                <h4>Apprentissage — Patterns</h4>
-                                <p>Mémoire organisationnelle</p>
-                            </div>
-                        </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">11</span>
+                        <span class="hero-stat-label">Métriques cognitives</span>
                     </div>
-                    <div class="flow-metrics">
-                        <div class="metric-item">
-                            <div class="metric-value">4</div>
-                            <div class="metric-label">Agents actifs</div>
-                        </div>
-                        <div class="metric-item">
-                            <div class="metric-value">11</div>
-                            <div class="metric-label">Métriques</div>
-                        </div>
-                        <div class="metric-item">
-                            <div class="metric-value">100%</div>
-                            <div class="metric-label">Local</div>
-                        </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">100%</span>
+                        <span class="hero-stat-label">Déployable en local</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Problem Section -->
+    <!-- ========================================
+         SECTION 2: PROBLÈME
+         ======================================== -->
     <section id="probleme" class="section-alt">
-        <div class="section-header">
-            <span class="section-label">Le Constat</span>
-            <h2>L'agilité classique ne suffit plus</h2>
-            <p>Scrum, Kanban, SAFe ont fluidifié la livraison. Mais ils n'ont pas été conçus pour l'ère de l'IA.</p>
-        </div>
-        <div class="grid grid-3">
-            <div class="card">
-                <div class="problem-icon">🔄</div>
-                <h3>Rituels devenus des fins en soi</h3>
-                <p>Daily standups, sprint planning, retrospectives... Ces cérémonies consomment du temps sans toujours créer de valeur.</p>
-            </div>
-            <div class="card">
-                <div class="problem-icon">🧠</div>
-                <h3>Surcharge cognitive</h3>
-                <p>Les équipes sont submergées d'informations à traiter, de décisions à prendre, de contexte à maintenir.</p>
-            </div>
-            <div class="card">
-                <div class="problem-icon">⏱️</div>
-                <h3>Cycles trop lents</h3>
-                <p>Les sprints de 2 semaines ne permettent plus de s'adapter assez vite à la complexité croissante.</p>
-            </div>
-            <div class="card">
-                <div class="problem-icon">🤖</div>
-                <h3>IA absente de l'équation</h3>
-                <p>Ces frameworks ont été conçus avant l'IA. Ils ne savent pas intégrer l'intelligence artificielle au cœur des processus.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sovereignty Section -->
-    <section id="souverainete" class="sovereignty-section">
-        <div class="sovereignty-content">
+        <div class="container">
             <div class="section-header">
-                <span class="section-label">🇪🇺 Souveraineté des données</span>
-                <h2>Conçu pour l'Europe</h2>
-                <p>SYNAPSE est pensé dès l'origine pour répondre aux exigences européennes de protection des données et de souveraineté numérique.</p>
+                <span class="section-label">Le Constat</span>
+                <h2>L'agilité classique ne suffit plus</h2>
+                <p>Scrum, Kanban, SAFe ont fluidifié la livraison. Mais ils n'ont pas été conçus pour l'ère de l'IA.</p>
             </div>
+            
             <div class="grid grid-4">
                 <div class="card">
-                    <h3>🏠 100% Déployable en local</h3>
-                    <p>Installez SYNAPSE sur votre propre infrastructure : Raspberry Pi, serveur dédié, cloud privé. Vos données ne quittent jamais votre périmètre.</p>
+                    <span class="card-icon">🔄</span>
+                    <h3>Rituels devenus des fins en soi</h3>
+                    <p>Daily standups, sprint planning, retrospectives... Ces cérémonies consomment du temps sans toujours créer de valeur.</p>
                 </div>
                 <div class="card">
-                    <h3>🔒 RGPD by design</h3>
-                    <p>Conformité native avec le Règlement Général sur la Protection des Données. Anonymisation, droit à l'oubli, audit trail intégrés.</p>
+                    <span class="card-icon">🧠</span>
+                    <h3>Surcharge cognitive</h3>
+                    <p>Les équipes sont submergées d'informations à traiter, de décisions à prendre, de contexte à maintenir.</p>
                 </div>
                 <div class="card">
-                    <h3>🔓 LLMs Open Source</h3>
-                    <p>Aucune dépendance aux clouds américains. Utilisez Ollama avec des modèles open source (Mistral, Llama) entièrement en local.</p>
+                    <span class="card-icon">⏱️</span>
+                    <h3>Cycles trop lents</h3>
+                    <p>Les sprints de 2 semaines ne permettent plus de s'adapter assez vite à la complexité croissante.</p>
                 </div>
                 <div class="card">
-                    <h3>📊 Vos données restent les vôtres</h3>
-                    <p>Pas de télémétrie cachée, pas d'envoi vers des serveurs tiers. Transparence totale sur le traitement des données.</p>
+                    <span class="card-icon">🤖</span>
+                    <h3>IA absente de l'équation</h3>
+                    <p>Ces frameworks ont été conçus avant l'IA. Ils ne savent pas intégrer l'intelligence artificielle.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Agents Section -->
-    <section id="agents" class="section-alt">
-        <div class="section-header">
-            <span class="section-label">Intelligence Artificielle</span>
-            <h2>4 agents IA à votre service</h2>
-            <p>Chaque agent a une mission fonctionnelle spécifique définie par le framework. L'implémentation technique est libre.</p>
-        </div>
-        <div class="grid grid-4">
-            <div class="card">
-                <div class="agent-icon">🧠</div>
-                <h3>Memory Agent</h3>
-                <div class="subtitle">Mémoire organisationnelle</div>
-                <p>Capture, structure et restitue la connaissance collective. Plus jamais de "on avait déjà essayé ça" sans contexte.</p>
-                <span class="agent-tag framework">Specs Framework</span>
+    <!-- ========================================
+         SECTION 3: SOLUTION (Fusionnée)
+         Rôles + Agents + Boucles
+         ======================================== -->
+    <section id="solution" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">La Solution SYNAPSE</span>
+                <h2>Humains au centre, IA en support</h2>
+                <p>Un système où 4 rôles humains gardent le contrôle, assistés par 4 agents IA, connectés par 3 boucles de feedback.</p>
             </div>
-            <div class="card">
-                <div class="agent-icon">🔍</div>
-                <h3>Pattern Agent</h3>
-                <div class="subtitle">Détection de récurrences</div>
-                <p>Identifie les blocages répétés, les goulots d'étranglement et les bonnes pratiques émergentes.</p>
-                <span class="agent-tag framework">Specs Framework</span>
+            
+            <div class="solution-intro">
+                <p>
+                    <strong>Principe fondamental :</strong> Les humains définissent l'intention, prennent les décisions critiques et gardent le veto. 
+                    L'IA analyse, détecte les patterns, simule les scénarios et optimise les flux. 
+                    Ensemble, ils créent ce qu'aucun ne pourrait seul.
+                </p>
             </div>
-            <div class="card">
-                <div class="agent-icon">🎲</div>
-                <h3>Simulation Agent</h3>
-                <div class="subtitle">Anticipation</div>
-                <p>Génère 3 à 5 scénarios avec probabilités pour chaque décision majeure. Décidez en connaissance de cause.</p>
-                <span class="agent-tag framework">Specs Framework</span>
-            </div>
-            <div class="card">
-                <div class="agent-icon">🔗</div>
-                <h3>Coordination Agent</h3>
-                <div class="subtitle">Optimisation des flux</div>
-                <p>Détecte les blocages, suggère des réorganisations, optimise la collaboration sans micro-management.</p>
-                <span class="agent-tag framework">Specs Framework</span>
-            </div>
-        </div>
-        <div style="margin-top: 2rem; padding: 1rem 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius-md); border: 1px solid var(--border-color); max-width: 900px; margin-left: auto; margin-right: auto;">
-            <p style="font-size: 0.95rem; color: var(--text-secondary); margin: 0;">
-                <strong style="color: var(--accent-primary);">💡 Implémentation libre :</strong> Ces agents sont des spécifications fonctionnelles du framework. Vous pouvez les implémenter avec Claude Code, n8n, LangChain, ou tout autre outil de votre choix.
-            </p>
-        </div>
-    </section>
 
-    <!-- Implementation Section -->
-<section id="implementation" class="section">
-    <div class="section-header">
-        <span class="section-label">Implémentation</span>
-        <h2>Comment adopter SYNAPSE ?</h2>
-        <p>SYNAPSE est un framework organisationnel agnostique sur l'implémentation technique.</p>
-    </div>
-    
-    <div class="grid grid-3">
-        <div class="card">
-            <div class="implementation-header">
-                <span class="implementation-icon">🛠️</span>
-                <h3>DIY (Do It Yourself)</h3>
+            <!-- SOUS-SECTION: 4 Rôles Humains -->
+            <div class="subsection">
+                <div class="subsection-header">
+                    <span class="subsection-icon">👥</span>
+                    <h3>4 Rôles Humains</h3>
+                    <span class="count">Contrôle & Décision</span>
+                </div>
+                
+                <div class="grid grid-4">
+                    <div class="card card-glow">
+                        <span class="card-icon">🎯</span>
+                        <h3>Intent Architect</h3>
+                        <span class="subtitle">Stratégie & Vision</span>
+                        <p>Définit et maintient la cohérence stratégique : objectifs, contraintes, limites éthiques.</p>
+                        <span class="tag tag-human">Veto stratégique</span>
+                    </div>
+                    <div class="card card-glow">
+                        <span class="card-icon">⚖️</span>
+                        <h3>Ethical Guardian</h3>
+                        <span class="subtitle">Éthique & Intégrité</span>
+                        <p>Surveille les dérives, audite les décisions IA, protège les droits des personnes.</p>
+                        <span class="tag tag-human">Veto éthique</span>
+                    </div>
+                    <div class="card card-glow">
+                        <span class="card-icon">🎛️</span>
+                        <h3>System Orchestrator</h3>
+                        <span class="subtitle">Configuration</span>
+                        <p>Configure et optimise le système cognitif. Active/désactive agents selon besoins.</p>
+                        <span class="tag tag-human">Config système</span>
+                    </div>
+                    <div class="card card-glow">
+                        <span class="card-icon">🛠️</span>
+                        <h3>Sovereign Maker</h3>
+                        <span class="subtitle">Exécution</span>
+                        <p>Matérialise les décisions dans le réel. Garde le contrôle créatif et la responsabilité.</p>
+                        <span class="tag tag-human">Faisabilité</span>
+                    </div>
+                </div>
             </div>
-            <p>Utilisez vos outils existants pour implémenter les agents selon les specs du framework :</p>
-            <ul class="implementation-list">
-                <li>Claude Code avec MCP</li>
-                <li>n8n pour l'orchestration</li>
-                <li>APIs LLM (OpenAI, Anthropic, Mistral)</li>
-                <li>Vos propres solutions custom</li>
-            </ul>
-            <div class="implementation-footer">
-                <span class="implementation-badge">🔓 Open Source</span>
-                <span class="implementation-badge">⚡ Immédiat</span>
-            </div>
-        </div>
-        
-        <div class="implementation-card featured">
-            <div class="implementation-ribbon">À venir</div>
-            <div class="implementation-header">
-                <span class="implementation-icon">🎯</span>
-                <h3>Implémentation de Référence</h3>
-            </div>
-            <p><strong>Disponible Q2 2026</strong></p>
-            <p>Une solution d'implémentation SYNAPSE (cloud et on-premise) sera proposée pour les organisations souhaitant une mise en œuvre clé en main.</p>
-            <ul class="implementation-list">
-                <li>Configuration guidée des 4 agents</li>
-                <li>Dashboard métriques cognitives</li>
-                <li>Templates prêts à l'emploi</li>
-                <li>Mises à jour automatiques</li>
-            </ul>
-            <div class="implementation-footer">
-                <span class="implementation-badge">☁️ Cloud & On-Premise</span>
-            </div>
-        </div>
-        
-        <div class="card">
-            <div class="implementation-header">
-                <span class="implementation-icon">🤝</span>
-                <h3>Accompagnement</h3>
-            </div>
-            <p>Formation et conseil disponibles pour :</p>
-            <ul class="implementation-list">
-                <li>Définir votre Intent Statement</li>
-                <li>Former vos équipes aux 4 rôles</li>
-                <li>Configurer vos premiers agents</li>
-                <li>Valider l'adoption du framework</li>
-            </ul>
-            <div class="implementation-footer">
-                <span class="implementation-badge">👥 Sur-mesure</span>
-                <span class="implementation-badge">📞 Support dédié</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Encadré important -->
-    <div class="implementation-principle">
-        <h3>L'important n'est pas l'outil, c'est le respect du framework</h3>
-        <div class="principle-grid">
-            <div class="principle-item">
-                <span class="principle-icon">✅</span>
-                <span>Les 4 rôles humains et leurs responsabilités</span>
-            </div>
-            <div class="principle-item">
-                <span class="principle-icon">✅</span>
-                <span>Les 3 boucles de gouvernance</span>
-            </div>
-            <div class="principle-item">
-                <span class="principle-icon">✅</span>
-                <span>Les garde-fous éthiques des agents</span>
-            </div>
-            <div class="principle-item">
-                <span class="principle-icon">✅</span>
-                <span>Les 11 métriques cognitives</span>
-            </div>
-        </div>
-    </div>
-</section>
 
-    <!-- Loops Section -->
-    <section id="boucles">
-        <div class="section-header">
-            <span class="section-label">Feedback Continu</span>
-            <h2>3 boucles de synchronisation</h2>
-            <p>SYNAPSE remplace les rituels agiles par des boucles adaptatives déclenchées par les événements.</p>
-        </div>
-        <div class="grid grid-3">
-            <div class="card">
-                <div class="loop-icon">🎯</div>
-                <h3>Intent Sync</h3>
-                <div class="loop-frequency">Hebdomadaire • 30-45 min</div>
-                <p>Vérifie l'alignement stratégique. L'organisation reste-t-elle fidèle à son intention ?</p>
+            <!-- SOUS-SECTION: 4 Agents IA -->
+            <div class="subsection">
+                <div class="subsection-header">
+                    <span class="subsection-icon">🤖</span>
+                    <h3>4 Agents IA</h3>
+                    <span class="count">Support & Analyse</span>
+                </div>
+                
+                <div class="grid grid-4">
+                    <div class="card card-glow">
+                        <span class="card-icon">🧠</span>
+                        <h3>Memory Agent</h3>
+                        <span class="subtitle">Mémoire organisationnelle</span>
+                        <p>Capture, structure et restitue la connaissance collective. Plus jamais de "on avait déjà essayé ça".</p>
+                        <span class="tag tag-ai">Continu</span>
+                    </div>
+                    <div class="card card-glow">
+                        <span class="card-icon">🔍</span>
+                        <h3>Pattern Agent</h3>
+                        <span class="subtitle">Détection de récurrences</span>
+                        <p>Identifie blocages répétés, goulots d'étranglement et bonnes pratiques émergentes.</p>
+                        <span class="tag tag-ai">Alertes</span>
+                    </div>
+                    <div class="card card-glow">
+                        <span class="card-icon">🎲</span>
+                        <h3>Simulation Agent</h3>
+                        <span class="subtitle">Anticipation</span>
+                        <p>Génère 3 à 5 scénarios avec probabilités pour chaque décision majeure.</p>
+                        <span class="tag tag-ai">À la demande</span>
+                    </div>
+                    <div class="card card-glow">
+                        <span class="card-icon">🔗</span>
+                        <h3>Coordination Agent</h3>
+                        <span class="subtitle">Optimisation des flux</span>
+                        <p>Détecte les blocages, suggère des réorganisations, optimise la collaboration.</p>
+                        <span class="tag tag-ai">Proactif</span>
+                    </div>
+                </div>
+                
+                <div class="sovereignty-highlight">
+                    <span>💡</span>
+                    <p><strong>Implémentation libre :</strong> Ces agents sont des spécifications fonctionnelles. Implémentez-les avec Claude Code, n8n, LangChain, ou vos propres outils. 100% déployable en local avec Ollama.</p>
+                </div>
             </div>
-            <div class="card">
-                <div class="loop-icon">🔍</div>
-                <h3>Pattern Review</h3>
-                <div class="loop-frequency">Continue + Hebdo • 15-30 min</div>
-                <p>Examine les patterns détectés et décide des actions correctives ou expérimentations.</p>
-            </div>
-            <div class="card">
-                <div class="loop-icon">⚡</div>
-                <h3>Decision Moment</h3>
-                <div class="loop-frequency">À la demande • 30 min - 2h</div>
-                <p>Prend une décision majeure éclairée par simulation et mémoire organisationnelle.</p>
+
+            <!-- SOUS-SECTION: 3 Boucles -->
+            <div class="subsection">
+                <div class="subsection-header">
+                    <span class="subsection-icon">🔄</span>
+                    <h3>3 Boucles de Feedback</h3>
+                    <span class="count">Synchronisation continue</span>
+                </div>
+                
+                <div class="grid grid-3">
+                    <div class="card loop-card">
+                        <span class="card-icon">🎯</span>
+                        <h3>Intent Sync</h3>
+                        <span class="loop-frequency">Hebdomadaire • 30-45 min</span>
+                        <p>Vérifie l'alignement stratégique. L'organisation reste-t-elle fidèle à son intention ?</p>
+                    </div>
+                    <div class="card loop-card">
+                        <span class="card-icon">🔍</span>
+                        <h3>Pattern Review</h3>
+                        <span class="loop-frequency">Continue + Hebdo • 15-30 min</span>
+                        <p>Examine les patterns détectés et décide des actions correctives ou expérimentations.</p>
+                    </div>
+                    <div class="card loop-card">
+                        <span class="card-icon">⚡</span>
+                        <h3>Decision Moment</h3>
+                        <span class="loop-frequency">À la demande • 30 min - 2h</span>
+                        <p>Prend une décision majeure éclairée par simulation et mémoire organisationnelle.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Metrics Section -->
+    <!-- ========================================
+         SECTION 4: MÉTRIQUES (Condensée)
+         ======================================== -->
     <section id="metriques" class="section-alt">
-        <div class="section-header">
-            <span class="section-label">Mesure & Pilotage</span>
-            <h2>11 métriques cognitives</h2>
-            <p>De nouvelles métriques pour mesurer la santé d'une organisation hybride humains-IA.</p>
-        </div>
-        <div class="grid grid-3">
-            <div class="card">
-                <h3>📊 Métriques Système</h3>
-                <ul class="metrics-list">
-                    <li>Temps de cohérence</li>
-                    <li>Taux d'adaptation</li>
-                    <li>Mémoire active</li>
-                    <li>Clarté d'intention</li>
-                    <li>Latence de décision</li>
-                </ul>
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Mesure & Pilotage</span>
+                <h2>11 métriques cognitives</h2>
+                <p>De nouvelles métriques pour mesurer la santé d'une organisation hybride humains-IA.</p>
             </div>
-            <div class="card">
-                <h3>👤 Métriques Humaines</h3>
-                <ul class="metrics-list">
-                    <li>Charge cognitive</li>
-                    <li>Autonomie perçue</li>
-                    <li>Confiance système</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>💼 Métriques de Valeur</h3>
-                <ul class="metrics-list">
-                    <li>Time to production</li>
-                    <li>Qualité livrée</li>
-                    <li>Coût d'adaptation</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Roles Section -->
-    <section id="roles">
-        <div class="section-header">
-            <span class="section-label">Organisation</span>
-            <h2>4 rôles humains essentiels</h2>
-            <p>Les humains gardent le contrôle avec des responsabilités claires et des pouvoirs de veto.</p>
-        </div>
-        <div class="grid grid-4">
-            <div class="card">
-                <div class="role-icon">🎯</div>
-                <div class="role-content">
-                    <h3>Intent Architect</h3>
-                    <div class="subtitle">Stratégie & Vision</div>
-                    <p>Définit et maintient la cohérence stratégique. Pouvoir de veto si contraire à l'intention.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="role-icon">⚖️</div>
-                <div class="role-content">
-                    <h3>Ethical Guardian</h3>
-                    <div class="subtitle">Éthique & Intégrité</div>
-                    <p>Surveille les dérives, audite les décisions IA. Pouvoir de veto si dérive éthique.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="role-icon">🎛️</div>
-                <div class="role-content">
-                    <h3>System Orchestrator</h3>
-                    <div class="subtitle">Configuration</div>
-                    <p>Configure et optimise le système cognitif. Active/désactive agents selon besoins.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="role-icon">🛠️</div>
-                <div class="role-content">
-                    <h3>Sovereign Maker</h3>
-                    <div class="subtitle">Exécution</div>
-                    <p>Matérialise les décisions dans le réel. Garde le contrôle créatif et la responsabilité.</p>
+            
+            <div class="card card-highlight metrics-card">
+                <div class="metrics-columns">
+                    <div class="metrics-column">
+                        <h4>📊 Système</h4>
+                        <ul>
+                            <li>Temps de cohérence</li>
+                            <li>Taux d'adaptation</li>
+                            <li>Mémoire active</li>
+                            <li>Clarté d'intention</li>
+                            <li>Latence de décision</li>
+                        </ul>
+                    </div>
+                    <div class="metrics-column">
+                        <h4>👤 Humain</h4>
+                        <ul>
+                            <li>Charge cognitive</li>
+                            <li>Autonomie perçue</li>
+                            <li>Confiance système</li>
+                        </ul>
+                    </div>
+                    <div class="metrics-column">
+                        <h4>💼 Valeur</h4>
+                        <ul>
+                            <li>Time to production</li>
+                            <li>Qualité livrée</li>
+                            <li>Coût d'adaptation</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Comparison Section -->
-    <section id="comparaison" class="section-alt">
-        <div class="section-header">
-            <span class="section-label">Comparaison</span>
-            <h2>SYNAPSE vs Agilité classique</h2>
-        </div>
-        <div class="comparison-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Aspect</th>
-                        <th>Agile classique</th>
-                        <th>SYNAPSE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Décisions</td>
-                        <td>Humains seuls</td>
-                        <td>Humains + IA</td>
-                    </tr>
-                    <tr>
-                        <td>Adaptation</td>
-                        <td>Cycles fixes (sprints)</td>
-                        <td>Continue (temps réel)</td>
-                    </tr>
-                    <tr>
-                        <td>Mémoire</td>
-                        <td>Documentation manuelle</td>
-                        <td>Graphe auto-généré</td>
-                    </tr>
-                    <tr>
-                        <td>Coordination</td>
-                        <td>Rituels humains</td>
-                        <td>Détection automatique</td>
-                    </tr>
-                    <tr>
-                        <td>Temps réunions</td>
-                        <td>~15-20% du temps</td>
-                        <td>~9-10% du temps</td>
-                    </tr>
-                    <tr>
-                        <td>Souveraineté données</td>
-                        <td>Variable (cloud)</td>
-                        <td>100% local possible</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- Status Section -->
-    <section id="statut">
-        <div class="section-header">
-            <span class="section-label">État du projet</span>
-            <h2>Où en sommes-nous ?</h2>
-            <p>SYNAPSE est un framework complet avec des spécifications détaillées. Nous recherchons maintenant des organisations pilotes pour validation terrain.</p>
-        </div>
-        <div class="grid grid-2">
-            <div class="card">
-                <h3>✅ Framework Complet</h3>
-                <ul class="status-list">
-                    <li>
-                        <span class="status-icon done">✓</span>
-                        Spécifications des 4 agents IA (fonctionnel + garde-fous)
-                    </li>
-                    <li>
-                        <span class="status-icon done">✓</span>
-                        Définition des 4 rôles humains
-                    </li>
-                    <li>
-                        <span class="status-icon done">✓</span>
-                        Spécifications des 3 boucles de gouvernance
-                    </li>
-                    <li>
-                        <span class="status-icon done">✓</span>
-                        11 métriques cognitives définies
-                    </li>
-                    <li>
-                        <span class="status-icon done">✓</span>
-                        Ethics Compliance System
-                    </li>
-                    <li>
-                        <span class="status-icon done">✓</span>
-                        Hiérarchie Intent (Organisation → Équipe)
-                    </li>
-                    <li>
-                        <span class="status-icon done">✓</span>
-                        Templates et outils de démarrage
-                    </li>
-                    <li>
-                        <span class="status-icon done">✓</span>
-                        Documentation complète (100k+ mots)
-                    </li>
-                </ul>
+    <!-- ========================================
+         SECTION 5: COMPARAISON
+         ======================================== -->
+    <section id="comparaison" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Comparaison</span>
+                <h2>SYNAPSE vs Agilité classique</h2>
             </div>
-            <div class="card">
-                <h3>🔄 Prochaines étapes</h3>
-                <ul class="status-list">
-                    <li>
-                        <span class="status-icon progress">◐</span>
-                        Recherche organisations pilotes
-                    </li>
-                    <li>
-                        <span class="status-icon planned">○</span>
-                        Validation terrain (Q2-Q3 2026)
-                    </li>
-                    <li>
-                        <span class="status-icon planned">○</span>
-                        Publication académique
-                    </li>
-                    <li>
-                        <span class="status-icon planned">○</span>
-                        Implémentation de référence (Q2 2026)
-                    </li>
-                </ul>
+            
+            <div class="comparison-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Agile classique</th>
+                            <th>SYNAPSE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Décisions</td>
+                            <td>Humains seuls</td>
+                            <td>Humains + IA (simulation)</td>
+                        </tr>
+                        <tr>
+                            <td>Adaptation</td>
+                            <td>Cycles fixes (sprints 2 sem)</td>
+                            <td>Continue (temps réel)</td>
+                        </tr>
+                        <tr>
+                            <td>Mémoire</td>
+                            <td>Documentation manuelle</td>
+                            <td>Graphe auto-généré</td>
+                        </tr>
+                        <tr>
+                            <td>Coordination</td>
+                            <td>Rituels humains (daily, retro)</td>
+                            <td>Détection automatique + alertes</td>
+                        </tr>
+                        <tr>
+                            <td>Temps réunions</td>
+                            <td>~15-20% du temps</td>
+                            <td>~9-10% du temps (-47%)</td>
+                        </tr>
+                        <tr>
+                            <td>Souveraineté données</td>
+                            <td>Variable (cloud US)</td>
+                            <td>100% local possible 🇪🇺</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack Section -->
-    <section id="tech" class="section-alt">
-        <div class="section-header">
-            <span class="section-label">Principes Techniques</span>
-            <h2>Implémentation flexible & souveraine</h2>
-            <p>SYNAPSE peut être implémenté avec diverses technologies selon vos besoins et contraintes.</p>
-        </div>
-        <div class="grid grid-3">
-            <div class="card">
-                <div class="tech-icon">🏠</div>
-                <h4>Déploiement local possible</h4>
-                <p>Peut fonctionner entièrement on-premise — aucun cloud externe requis</p>
+    <!-- ========================================
+         SECTION 6: SOUVERAINETÉ + STATUT
+         ======================================== -->
+    <section id="statut" class="section-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">État du Projet</span>
+                <h2>Framework complet, validation terrain en cours</h2>
+                <p>SYNAPSE est un framework documenté avec 100k+ mots. Nous recherchons des organisations pilotes pour validation.</p>
             </div>
-            <div class="card">
-                <div class="tech-icon">🧠</div>
-                <h4>LLMs au choix</h4>
-                <p>Ollama (local), OpenAI, Anthropic, Mistral, ou tout autre LLM</p>
+            
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>✅ Ce qui est prêt</h3>
+                    <ul class="status-list">
+                        <li>
+                            <span class="status-icon done">✓</span>
+                            Spécifications complètes des 4 agents IA
+                        </li>
+                        <li>
+                            <span class="status-icon done">✓</span>
+                            Définition des 4 rôles humains + responsabilités
+                        </li>
+                        <li>
+                            <span class="status-icon done">✓</span>
+                            3 boucles de gouvernance documentées
+                        </li>
+                        <li>
+                            <span class="status-icon done">✓</span>
+                            11 métriques cognitives avec cibles
+                        </li>
+                        <li>
+                            <span class="status-icon done">✓</span>
+                            Charte éthique et garde-fous
+                        </li>
+                        <li>
+                            <span class="status-icon done">✓</span>
+                            Templates prêts à l'emploi
+                        </li>
+                        <li>
+                            <span class="status-icon done">✓</span>
+                            Documentation 100k+ mots (FR/EN)
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card card-highlight">
+                    <h3>🎯 Prochaines étapes</h3>
+                    <ul class="status-list">
+                        <li>
+                            <span class="status-icon progress">◐</span>
+                            <strong>Recherche organisations pilotes</strong> (en cours)
+                        </li>
+                        <li>
+                            <span class="status-icon planned">○</span>
+                            Validation terrain (Q2-Q3 2026)
+                        </li>
+                        <li>
+                            <span class="status-icon planned">○</span>
+                            Publication académique
+                        </li>
+                        <li>
+                            <span class="status-icon planned">○</span>
+                            Implémentation de référence cloud/on-premise
+                        </li>
+                    </ul>
+                    
+                    <div class="sovereignty-highlight" style="margin-top: 1.5rem;">
+                        <span>🇪🇺</span>
+                        <p><strong>Souveraineté garantie :</strong> 100% déployable en local, RGPD by design, aucune dépendance cloud US. Vos données restent les vôtres.</p>
+                    </div>
+                </div>
             </div>
-            <div class="card">
-                <div class="tech-icon">📊</div>
-                <h4>Base de données flexible</h4>
-                <p>PostgreSQL, MongoDB, ou votre système de données existant</p>
-            </div>
-            <div class="card">
-                <div class="tech-icon">🔄</div>
-                <h4>Orchestration adaptable</h4>
-                <p>n8n, Zapier, Make, ou développement custom</p>
-            </div>
-            <div class="card">
-                <div class="tech-icon">⚡</div>
-                <h4>Backend libre</h4>
-                <p>TypeScript, Python, Go, ou votre stack préférée</p>
-            </div>
-            <div class="card">
-                <div class="tech-icon">🎨</div>
-                <h4>Interface personnalisable</h4>
-                <p>React, Vue, Angular, ou intégration dans vos outils existants</p>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius-lg); max-width: 800px; margin-left: auto; margin-right: auto; border: 1px solid var(--border-color);">
-            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin: 0;">
-                💡 <strong>Exemple d'implémentation :</strong> Notre implémentation de référence utilisera TypeScript/Fastify/PostgreSQL/Ollama, mais ce n'est qu'une option parmi d'autres. Le framework SYNAPSE est conçu pour être agnostique technologiquement — ce qui compte, c'est le respect des spécifications organisationnelles et des garde-fous.
-            </p>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section id="commencer" class="cta-section">
+    <!-- ========================================
+         SECTION 7: CTA
+         ======================================== -->
+    <section id="cta" class="cta-section">
         <div class="cta-content">
             <h2>Prêt à transformer votre organisation ?</h2>
-            <p>SYNAPSE est 100% open source. La documentation complète est disponible gratuitement. Le framework peut être implémenté dès aujourd'hui.</p>
+            <p>
+                SYNAPSE est 100% open source. La documentation complète est disponible gratuitement.<br>
+                Nous recherchons 3-5 organisations pilotes pour valider le framework en conditions réelles.
+            </p>
             <div class="cta-buttons">
-                <a href="https://github.com/synapse-origin/synapse-fr" class="btn btn-primary">Accéder au Framework</a>
-                <a href="/cdn-cgi/l/email-protection#4b3832252a3b382e662439222c22250b3b39243f242565262e" class="btn btn-secondary">Devenir Organisation Pilote</a>
+                <a href="mailto:synapse-origin@proton.me?subject=Candidature%20Organisation%20Pilote%20SYNAPSE" class="btn btn-primary">
+                    🎯 Devenir Organisation Pilote
+                </a>
+                <a href="https://github.com/synapse-origin/synapse-fr" class="btn btn-secondary" target="_blank" rel="noopener">
+                    📖 Lire la Documentation
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <div class="logo">SYNAPSE</div>
+                <span class="logo">SYNAPSE</span>
                 <p>"Nous ne rendons pas l'ancien monde plus efficace. Nous construisons le suivant."</p>
             </div>
+            
             <div class="footer-section">
                 <h4>Framework</h4>
                 <ul>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/framework/SYNAPSE-V1.md">Documentation</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/docs/getting-started.md">Guide de démarrage</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/templates">Templates</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/community/faq.md">FAQ</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/framework/SYNAPSE-V0.1.md" target="_blank">Documentation V1.0</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/docs/getting-started.md" target="_blank">Guide de démarrage</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/templates" target="_blank">Templates</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/community/faq.md" target="_blank">FAQ</a></li>
                 </ul>
             </div>
+            
             <div class="footer-section">
                 <h4>Communauté</h4>
                 <ul>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/discussions">Discussions GitHub</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/case-studies">Études de cas</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/CONTRIBUTING">Contribuer</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/research">Recherche</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/discussions" target="_blank">Discussions GitHub</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/CONTRIBUTING" target="_blank">Contribuer</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/case-studies" target="_blank">Études de cas</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/research" target="_blank">Recherche</a></li>
                 </ul>
             </div>
+            
             <div class="footer-section">
                 <h4>Contact</h4>
                 <ul>
-                    <li><a href="/cdn-cgi/l/email-protection#97e4eef9f6e7e4f2baf8e5fef0fef9d7e7e5f8e3f8f9b9faf2"><span class="__cf_email__" data-cfemail="9fece6f1feefecfab2f0edf6f8f6f1dfefedf0ebf0f1b1f2fa">[email&#160;protected]</span></a></li>
-                    <li><a href="/cdn-cgi/l/email-protection#394a405758494a5c14564b505e505779494b564d565717545c">Devenir pilote</a></li>
-                    <li><a href="/cdn-cgi/l/email-protection#6e1d17000f1e1d0b43011c070907002e1e1c011a010040030b">Partenariats</a></li>
+                    <li><a href="mailto:synapse-origin@proton.me">synapse-origin@proton.me</a></li>
+                    <li><a href="mailto:synapse-origin@proton.me?subject=Candidature%20Pilote">Devenir pilote</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr" target="_blank">GitHub</a></li>
                 </ul>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            © 2025-2026 SYNAPSE Origin. Framework sous licence CC BY-SA 4.0 • Fait avec 🧠 en France
+            © 2025-2026 SYNAPSE Origin • Framework sous licence CC BY-SA 4.0 • Fait avec 🧠 en France
         </div>
     </footer>
 
-    <!-- Theme Toggle Script -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Check for saved theme preference or default to light
+    <!-- ========================================
+         SCRIPTS
+         ======================================== -->
+    <script>
+        // Theme management
         function getThemePreference() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                return savedTheme;
-            }
-            // Check system preference
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                return 'dark';
-            }
-            return 'light';
+            const savedTheme = localStorage.getItem('synapse-theme');
+            if (savedTheme) return savedTheme;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
 
-        // Apply theme
         function applyTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            
-            // Update toggle icon
+            localStorage.setItem('synapse-theme', theme);
+            updateThemeIcon(theme);
+        }
+
+        function updateThemeIcon(theme) {
             const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
             const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
             
@@ -1603,13 +563,51 @@ footer {
             });
         }
 
-        // Toggle theme
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(newTheme);
+            applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
         }
 
-        // Initialize theme on page load
+        // Initialize on load
         document.addEventListener('DOMContentLoaded', () => {
-            applyTheme(getT
+            applyTheme(getThemePreference());
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('synapse-theme')) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Smooth scroll for anchor links (fallback for older browsers)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add scroll-based nav background opacity
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                nav.style.boxShadow = 'var(--shadow-md)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+            
+            lastScroll = currentScroll;
+        }, { passive: true });
+    </script>
+</body>
+</html>

@@ -3,77 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYNAPSE — Framework d'Agilité Cognitive</title>
-    <meta name="description" content="SYNAPSE unifie humains et IA pour des organisations plus intelligentes. 4 rôles humains au centre, 4 agents IA en support. Framework open source.">
+    <title>SYNAPSE — Le Framework d'Agilité Cognitive</title>
+    <meta name="description" content="SYNAPSE unifie humains et intelligence artificielle pour créer des organisations plus intelligentes, adaptatives et responsables. Framework open source pour l'ère de l'IA.">
     
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
+        /* ========================================
+           THEME VARIABLES
+           ======================================== */
+        
         :root {
             --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 20px;
-            --transition: 0.3s ease;
+            --radius-xl: 24px;
+            --transition-theme: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
+        /* Light Theme (Default) */
         [data-theme="light"] {
             --bg-primary: #ffffff;
             --bg-secondary: #f8fafc;
             --bg-tertiary: #f1f5f9;
             --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
             --text-primary: #0f172a;
             --text-secondary: #475569;
             --text-muted: #94a3b8;
-            --accent: #0ea5e9;
+            --accent-primary: #0ea5e9;
             --accent-secondary: #8b5cf6;
             --accent-green: #10b981;
+            --accent-orange: #f59e0b;
             --accent-red: #ef4444;
-            --gradient: linear-gradient(135deg, #0ea5e9, #8b5cf6);
-            --border: #e2e8f0;
+            --accent-blue: #3b82f6;
+            --gradient-primary: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            --border-color: #e2e8f0;
             --border-accent: rgba(14,165,233,0.3);
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.03);
+            --shadow-glow: 0 0 40px rgba(14,165,233,0.15);
             --nav-bg: rgba(255,255,255,0.9);
+            --hero-gradient: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            --hero-blob-1: rgba(14,165,233,0.08);
+            --hero-blob-2: rgba(139,92,246,0.06);
+            --toggle-bg: #e2e8f0;
+            --toggle-knob: #ffffff;
+            --toggle-icon: #f59e0b;
         }
 
+        /* Dark Theme */
         [data-theme="dark"] {
             --bg-primary: #0a0a0f;
             --bg-secondary: #12121a;
             --bg-tertiary: #1a1a25;
             --bg-card: #16161f;
+            --bg-card-hover: #1e1e2a;
             --text-primary: #f0f0f5;
             --text-secondary: #a0a0b0;
             --text-muted: #606070;
-            --accent: #00d4ff;
+            --accent-primary: #00d4ff;
             --accent-secondary: #8b5cf6;
             --accent-green: #10b981;
+            --accent-orange: #f59e0b;
             --accent-red: #ef4444;
-            --gradient: linear-gradient(135deg, #00d4ff, #8b5cf6);
-            --border: rgba(255,255,255,0.08);
+            --accent-blue: #3b82f6;
+            --gradient-primary: linear-gradient(135deg, #00d4ff, #8b5cf6);
+            --border-color: rgba(255,255,255,0.08);
             --border-accent: rgba(0,212,255,0.3);
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
-            --nav-bg: rgba(10,10,15,0.9);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -1px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5), 0 4px 6px -2px rgba(0,0,0,0.4);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.5), 0 10px 10px -5px rgba(0,0,0,0.4);
+            --shadow-glow: 0 0 60px rgba(0,212,255,0.2);
+            --nav-bg: rgba(10,10,15,0.85);
+            --hero-gradient: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            --hero-blob-1: rgba(0,212,255,0.1);
+            --hero-blob-2: rgba(139,92,246,0.08);
+            --toggle-bg: #2a2a3a;
+            --toggle-knob: #0a0a0f;
+            --toggle-icon: #8b5cf6;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
+        /* ========================================
+           BASE STYLES
+           ======================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--font-sans);
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
-            transition: background-color var(--transition), color var(--transition);
+            overflow-x: hidden;
+            transition: var(--transition-theme);
         }
 
-        /* ========== NAVIGATION ========== */
+        /* Grain overlay for dark mode */
+        [data-theme="dark"] body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            z-index: 1000;
+        }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+
         nav {
             position: fixed;
             top: 0;
@@ -83,11 +142,12 @@
             padding: 1rem 2rem;
             background: var(--nav-bg);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition-theme);
         }
 
         nav .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -97,16 +157,17 @@
         .logo {
             font-weight: 800;
             font-size: 1.25rem;
-            background: var(--gradient);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.5px;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1.75rem;
             align-items: center;
         }
 
@@ -115,183 +176,408 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: color var(--transition);
+            transition: color 0.2s;
         }
 
-        nav a:hover { color: var(--accent); }
+        nav a:hover {
+            color: var(--text-primary);
+        }
 
         .nav-cta {
-            background: var(--gradient);
+            background: var(--gradient-primary);
             color: white !important;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             border-radius: var(--radius-sm);
             font-weight: 600;
+            box-shadow: var(--shadow-md);
         }
 
+        .nav-cta:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Theme Toggle */
         .theme-toggle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .toggle-track {
+            width: 52px;
+            height: 28px;
+            background: var(--toggle-bg);
+            border-radius: 100px;
+            position: relative;
+            transition: var(--transition-theme);
+            border: 1px solid var(--border-color);
+        }
+
+        .toggle-knob {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: var(--toggle-knob);
+            border-radius: 50%;
+            transition: transform 0.3s ease, background-color 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
+            box-shadow: var(--shadow-sm);
         }
 
-        /* ========== HERO ========== */
+        .toggle-knob svg {
+            width: 12px;
+            height: 12px;
+            color: var(--toggle-icon);
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .toggle-knob {
+            transform: translateX(24px);
+            background: var(--bg-card);
+        }
+
+        .toggle-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+
         .hero {
-            padding: 8rem 2rem 5rem;
-            text-align: center;
-            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+            background: var(--hero-gradient);
+            transition: var(--transition-theme);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 60%;
+            height: 80%;
+            background: radial-gradient(circle, var(--hero-blob-1) 0%, transparent 60%);
+            border-radius: 50%;
+            transition: var(--transition-theme);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 40%;
+            height: 60%;
+            background: radial-gradient(circle, var(--hero-blob-2) 0%, transparent 60%);
+            border-radius: 50%;
+            transition: var(--transition-theme);
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1.5px;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .hero-content h1 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 520px;
+            line-height: 1.7;
+            transition: var(--transition-theme);
         }
 
         .hero-badges {
             display: flex;
             gap: 0.75rem;
-            justify-content: center;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
-            margin-bottom: 1.5rem;
         }
 
         .badge {
-            padding: 0.4rem 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.85rem;
             color: var(--text-secondary);
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-theme);
         }
 
         .badge.accent {
             background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(139,92,246,0.1));
             border-color: var(--border-accent);
-            color: var(--accent);
+            color: var(--accent-primary);
+        }
+
+        [data-theme="dark"] .badge.accent {
+            background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(139,92,246,0.15));
         }
 
         .badge-dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-green);
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            margin-right: 6px;
-            animation: pulse 2s infinite;
+            background: var(--accent-green);
+            animation: pulse 2s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 800;
-            margin-bottom: 1.25rem;
-            letter-spacing: -1px;
-            line-height: 1.1;
-        }
-
-        .hero h1 span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero > p {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 650px;
-            margin: 0 auto 2rem;
-            line-height: 1.7;
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.9); }
         }
 
         .hero-buttons {
             display: flex;
             gap: 1rem;
-            justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 3rem;
         }
 
         .btn {
-            padding: 0.9rem 1.75rem;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: all var(--transition);
+            padding: 0.9rem 1.8rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
         }
 
         .btn-primary {
-            background: var(--gradient);
+            background: var(--gradient-primary);
             color: white;
-            box-shadow: var(--shadow-md), 0 0 30px rgba(14,165,233,0.2);
+            box-shadow: var(--shadow-md);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg), 0 0 40px rgba(14,165,233,0.3);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
         }
 
         .btn-secondary {
             background: var(--bg-card);
+            border: 1px solid var(--border-color);
             color: var(--text-primary);
-            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-theme);
         }
 
         .btn-secondary:hover {
-            border-color: var(--accent);
+            border-color: var(--accent-primary);
             background: rgba(14,165,233,0.05);
+            box-shadow: var(--shadow-md);
         }
 
-        /* Hero Stats */
-        .hero-stats {
+        [data-theme="dark"] .btn-secondary:hover {
+            background: rgba(0,212,255,0.1);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+        }
+
+        .flow-diagram {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition-theme);
+        }
+
+        [data-theme="dark"] .flow-diagram::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: var(--radius-xl);
+            padding: 1px;
+            background: linear-gradient(135deg, var(--border-accent), transparent, var(--border-accent));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        .flow-header {
             display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition-theme);
         }
 
-        .stat {
-            text-align: center;
+        .flow-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            transition: var(--transition-theme);
         }
 
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            font-family: var(--font-mono);
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+        .flow-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--accent-green);
             font-weight: 500;
         }
 
-        /* ========== SECTIONS ========== */
-        section {
-            padding: 5rem 2rem;
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
-        .section-alt {
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
             background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .flow-step:hover {
+            background: var(--bg-tertiary);
+            transform: translateX(4px);
+            border-color: var(--border-accent);
+        }
+
+        .flow-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            font-size: 1.25rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-theme);
+        }
+
+        .flow-step-content h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .flow-step-content p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: var(--transition-theme);
+        }
+
+        .flow-arrow {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0.25rem 0;
+            transition: var(--transition-theme);
+        }
+
+        .flow-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            transition: var(--transition-theme);
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            transition: var(--transition-theme);
+        }
+
+        .metric-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: var(--font-mono);
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+            font-weight: 500;
+            transition: var(--transition-theme);
+        }
+
+        /* ========================================
+           SECTIONS
+           ======================================== */
+
+        section {
+            padding: 6rem 2rem;
+            transition: var(--transition-theme);
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .section-label {
@@ -300,448 +586,562 @@
             background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(139,92,246,0.1));
             border: 1px solid var(--border-accent);
             border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-primary);
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: var(--transition-theme);
+        }
+
+        [data-theme="dark"] .section-label {
+            background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(139,92,246,0.15));
         }
 
         .section-header h2 {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-size: clamp(2rem, 4vw, 2.75rem);
             font-weight: 800;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             letter-spacing: -0.5px;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
         }
 
         .section-header p {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.7;
+            transition: var(--transition-theme);
         }
 
-        /* ========== PROBLÈME ========== */
+        /* Alt background sections */
+        .section-alt {
+            background: var(--bg-secondary);
+        }
+
+        /* ========================================
+           PROBLEM CARDS
+           ======================================== */
+
         .problems-grid {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
+            gap: 1.5rem;
         }
 
         .problem-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            transition: all var(--transition);
+            padding: 2rem;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
         }
 
         .problem-card:hover {
             border-color: var(--accent-red);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
 
         .problem-icon {
-            width: 44px;
-            height: 44px;
+            width: 52px;
+            height: 52px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(239,68,68,0.1);
-            border-radius: var(--radius-sm);
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
+            border-radius: var(--radius-md);
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .problem-card h3 {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
             font-weight: 700;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
         }
 
         .problem-card p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            transition: var(--transition-theme);
         }
 
-        /* ========== SOLUTION (Rôles + Agents + Boucles) ========== */
-        .solution-section {
+        /* ========================================
+           SOVEREIGNTY SECTION
+           ======================================== */
+
+        .sovereignty-section {
             position: relative;
+            overflow: hidden;
         }
 
-        .solution-intro {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            padding: 1.5rem;
-            background: var(--bg-tertiary);
-            border-radius: var(--radius-lg);
-            border-left: 4px solid var(--accent);
+        .sovereignty-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 50% 0%, var(--hero-blob-1) 0%, transparent 60%);
+            transition: var(--transition-theme);
         }
 
-        .solution-intro p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin: 0;
-        }
-
-        .solution-intro strong {
-            color: var(--text-primary);
-        }
-
-        /* Subsection headers */
-        .subsection {
-            margin-bottom: 4rem;
-        }
-
-        .subsection:last-child {
-            margin-bottom: 0;
-        }
-
-        .subsection-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .subsection-header h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .subsection-header p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Roles Grid - 4 rôles humains */
-        .roles-grid {
+        .sovereignty-content {
             max-width: 1000px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .role-card {
+        .sovereignty-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .sovereignty-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            text-align: center;
-            transition: all var(--transition);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
         }
 
-        .role-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
+        .sovereignty-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
         }
 
-        .role-icon {
-            font-size: 2rem;
+        .sovereignty-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .sovereignty-card h3 {
+            font-size: 1.15rem;
             margin-bottom: 0.75rem;
-        }
-
-        .role-card h4 {
-            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             font-weight: 700;
-            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
         }
 
-        .role-subtitle {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-        }
-
-        .role-card p {
-            font-size: 0.85rem;
+        .sovereignty-card p {
             color: var(--text-secondary);
-            line-height: 1.4;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            transition: var(--transition-theme);
         }
 
-        .role-veto {
-            display: inline-block;
-            margin-top: 0.75rem;
-            padding: 0.25rem 0.6rem;
-            background: rgba(239,68,68,0.1);
-            color: var(--accent-red);
-            border-radius: var(--radius-sm);
-            font-size: 0.7rem;
-            font-weight: 700;
-        }
+        /* ========================================
+           AGENTS GRID
+           ======================================== */
 
-        /* Agents Grid - 4 agents IA */
         .agents-grid {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .agent-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            text-align: center;
-            position: relative;
-            transition: all var(--transition);
-        }
-
-        .agent-card:hover {
-            border-color: var(--accent-secondary);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .agent-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .agent-card h4 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .agent-subtitle {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .agent-card p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-
-        .agent-status {
-            position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-green);
-            border-radius: 50%;
-        }
-
-        /* Loops Grid - 3 boucles */
-        .loops-grid {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
-        .loop-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            text-align: center;
-            transition: all var(--transition);
-        }
-
-        .loop-card:hover {
-            border-color: var(--accent);
-            box-shadow: var(--shadow-md);
-        }
-
-        .loop-icon {
-            font-size: 1.75rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .loop-card h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .loop-freq {
-            font-size: 0.75rem;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .loop-card p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-
-        /* ========== MÉTRIQUES (condensé) ========== */
-        .metrics-card {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             padding: 2rem;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .metrics-category h4 {
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .metrics-category ul {
-            list-style: none;
-        }
-
-        .metrics-category li {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            padding: 0.3rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .metrics-category li:last-child {
-            border-bottom: none;
-        }
-
-        /* ========== COMPARAISON ========== */
-        .comparison-table {
-            max-width: 800px;
-            margin: 0 auto;
-            border-collapse: collapse;
-            width: 100%;
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
         }
 
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .agent-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .agent-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--border-accent);
+        }
+
+        .agent-icon {
+            width: 68px;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            transition: var(--transition-theme);
+        }
+
+        .agent-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .agent-card .subtitle {
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            transition: var(--transition-theme);
+        }
+
+        .agent-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+            transition: var(--transition-theme);
+        }
+
+        .agent-tag {
+            display: inline-block;
+            padding: 0.35rem 0.9rem;
+            background: var(--bg-secondary);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: var(--transition-theme);
+        }
+
+        .agent-tag.active {
+            background: rgba(16,185,129,0.1);
+            color: var(--accent-green);
+        }
+
+        .agent-tag.progress {
+            background: rgba(245,158,11,0.1);
+            color: var(--accent-orange);
+        }
+
+        /* ========================================
+           LOOPS SECTION
+           ======================================== */
+
+        .loops-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .loop-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .loop-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .loop-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(139,92,246,0.1));
+            border-radius: 50%;
+            font-size: 1.5rem;
+            margin: 0 auto 1.25rem;
+            transition: var(--transition-theme);
+        }
+
+        [data-theme="dark"] .loop-icon {
+            background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(139,92,246,0.15));
+        }
+
+        .loop-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .loop-frequency {
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            transition: var(--transition-theme);
+        }
+
+        .loop-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            transition: var(--transition-theme);
+        }
+
+        /* ========================================
+           METRICS SECTION
+           ======================================== */
+
+        .metrics-categories {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .metrics-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-theme);
+        }
+
+        .metrics-category h3 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-primary);
+            font-weight: 700;
+            transition: var(--transition-theme);
+        }
+
+        .metrics-list {
+            list-style: none;
+        }
+
+        .metrics-list li {
+            padding: 0.6rem 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-theme);
+        }
+
+        .metrics-list li:last-child {
+            border-bottom: none;
+        }
+
+        .metrics-list li::before {
+            content: '→';
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* ========================================
+           ROLES GRID
+           ======================================== */
+
+        .roles-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .role-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .role-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .role-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            transition: var(--transition-theme);
+        }
+
+        .role-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .role-content .subtitle {
+            font-size: 0.85rem;
+            color: var(--accent-secondary);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            transition: var(--transition-theme);
+        }
+
+        .role-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            transition: var(--transition-theme);
+        }
+
+        /* ========================================
+           COMPARISON TABLE
+           ======================================== */
+
+        .comparison-table {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-theme);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
         .comparison-table th,
         .comparison-table td {
-            padding: 1rem 1.25rem;
+            padding: 1.25rem 1.5rem;
             text-align: left;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition-theme);
         }
 
         .comparison-table th {
-            background: var(--bg-tertiary);
+            background: var(--bg-secondary);
             font-weight: 700;
             font-size: 0.9rem;
         }
 
-        .comparison-table td {
-            font-size: 0.9rem;
+        .comparison-table th:first-child {
+            color: var(--text-muted);
+        }
+
+        .comparison-table th:nth-child(2) {
             color: var(--text-secondary);
         }
 
-        .comparison-table td:first-child {
-            font-weight: 600;
+        .comparison-table th:nth-child(3) {
+            color: var(--accent-primary);
+        }
+
+        .comparison-table td {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .comparison-table td:nth-child(3) {
             color: var(--text-primary);
+            font-weight: 500;
         }
 
         .comparison-table tr:last-child td {
             border-bottom: none;
         }
 
-        .comparison-table .synapse {
-            color: var(--accent);
-            font-weight: 600;
+        .comparison-table tr:hover td {
+            background: var(--bg-secondary);
         }
 
-        /* ========== SOUVERAINETÉ + IMPLÉMENTATION ========== */
-        .sovereignty-impl {
+        /* ========================================
+           STATUS SECTION
+           ======================================== */
+
+        .status-grid {
             max-width: 1000px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .sov-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-        }
-
-        .sov-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .sov-list {
-            list-style: none;
-        }
-
-        .sov-list li {
-            padding: 0.6rem 0;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .sov-list li:last-child {
-            border-bottom: none;
-        }
-
-        .sov-list .icon {
-            flex-shrink: 0;
-        }
-
-        /* ========== STATUT & CTA ========== */
-        .status-cta {
-            text-align: center;
-        }
-
-        .status-grid {
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .status-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            text-align: left;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-theme);
         }
 
         .status-card h3 {
-            font-size: 1rem;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
         }
 
         .status-list {
@@ -749,36 +1149,140 @@
         }
 
         .status-list li {
-            padding: 0.4rem 0;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-
-        .status-done { color: var(--accent-green); }
-        .status-progress { color: var(--accent); }
-        .status-planned { color: var(--text-muted); }
-
-        .cta-box {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2.5rem;
-            background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(139,92,246,0.1));
-            border: 1px solid var(--border-accent);
-            border-radius: var(--radius-lg);
-        }
-
-        .cta-box h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 0.75rem;
-        }
-
-        .cta-box p {
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
             color: var(--text-secondary);
+            transition: var(--transition-theme);
+        }
+
+        .status-list li:last-child {
+            border-bottom: none;
+        }
+
+        .status-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+
+        .status-icon.done {
+            background: rgba(16,185,129,0.15);
+            color: var(--accent-green);
+        }
+
+        .status-icon.progress {
+            background: rgba(245,158,11,0.15);
+            color: var(--accent-orange);
+        }
+
+        .status-icon.planned {
+            background: rgba(59,130,246,0.15);
+            color: var(--accent-blue);
+        }
+
+        /* ========================================
+           TECH STACK
+           ======================================== */
+
+        .tech-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tech-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tech-icon {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .tech-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: var(--transition-theme);
+        }
+
+        /* ========================================
+           CTA SECTION
+           ======================================== */
+
+        .cta-section {
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            text-align: center;
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-theme);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, var(--hero-blob-1) 0%, transparent 60%);
+            transition: var(--transition-theme);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .cta-content p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            transition: var(--transition-theme);
         }
 
         .cta-buttons {
@@ -788,37 +1292,50 @@
             flex-wrap: wrap;
         }
 
-        /* ========== FOOTER ========== */
+        /* ========================================
+           FOOTER
+           ======================================== */
+
         footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: 3rem 2rem 2rem;
+            background: var(--bg-primary);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--border-color);
+            transition: var(--transition-theme);
         }
 
         .footer-content {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr repeat(3, 1fr);
-            gap: 2rem;
+            gap: 3rem;
+        }
+
+        .footer-brand {
+            max-width: 300px;
         }
 
         .footer-brand .logo {
-            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .footer-brand p {
-            font-size: 0.85rem;
             color: var(--text-muted);
+            font-size: 0.9rem;
             font-style: italic;
+            line-height: 1.6;
+            transition: var(--transition-theme);
         }
 
         .footer-section h4 {
             font-size: 0.85rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            transition: var(--transition-theme);
         }
 
         .footer-section ul {
@@ -826,73 +1343,309 @@
         }
 
         .footer-section li {
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.6rem;
         }
 
         .footer-section a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.85rem;
-            transition: color var(--transition);
+            font-size: 0.9rem;
+            transition: color 0.2s;
         }
 
         .footer-section a:hover {
-            color: var(--accent);
+            color: var(--accent-primary);
         }
 
         .footer-bottom {
-            max-width: 1000px;
-            margin: 2rem auto 0;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
             text-align: center;
-            font-size: 0.8rem;
             color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: var(--transition-theme);
         }
 
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 900px) {
-            .roles-grid,
+        /* ========================================
+   IMPLEMENTATION SECTION STYLES
+   ======================================== */
+
+.implementation-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.implementation-card {
+    position: relative;
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.implementation-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.implementation-card.featured {
+    border-color: var(--accent-primary);
+    background: linear-gradient(135deg, 
+        rgba(14,165,233,0.03) 0%, 
+        rgba(139,92,246,0.03) 100%);
+}
+
+[data-theme="dark"] .implementation-card.featured {
+    background: linear-gradient(135deg, 
+        rgba(14,165,233,0.05) 0%, 
+        rgba(139,92,246,0.05) 100%);
+}
+
+.implementation-ribbon {
+    position: absolute;
+    top: 1rem;
+    right: -0.5rem;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+}
+
+.implementation-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.implementation-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.implementation-header h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.implementation-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.implementation-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    flex-grow: 1;
+}
+
+.implementation-list li {
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.implementation-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-weight: bold;
+}
+
+.implementation-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.implementation-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.4rem 0.8rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Encadré principe */
+.implementation-principle {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--accent-primary);
+}
+
+.implementation-principle h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.principle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.principle-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.principle-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.principle-item span:last-child {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .implementation-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .principle-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .implementation-principle {
+        padding: 1.5rem;
+    }
+}
+        
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-badges {
+                justify-content: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
             .agents-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .loops-grid,
-            .metrics-grid {
+
+            .loops-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .sovereignty-impl {
+
+            .metrics-categories {
                 grid-template-columns: 1fr;
             }
+        }
+
+        /* Hide mobile toggle on desktop */
+        .nav-mobile-toggle {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            nav .container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            /* Show mobile toggle on mobile */
+            .nav-mobile-toggle {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
             
+            .nav-cta-mobile {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .problems-grid,
+            .status-grid,
+            .roles-grid,
+            .sovereignty-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-        }
 
-        @media (max-width: 600px) {
-            nav ul { display: none; }
-            
-            .problems-grid,
-            .roles-grid,
-            .agents-grid,
-            .status-grid {
-                grid-template-columns: 1fr;
+            .footer-brand {
+                max-width: none;
             }
-            
-            .hero-stats {
-                gap: 1.5rem;
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-            
-            .comparison-table {
-                font-size: 0.8rem;
+
+            .hero-content h1 {
+                font-size: 2.25rem;
             }
-            
-            .comparison-table th,
-            .comparison-table td {
-                padding: 0.75rem;
+
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+
+            .toggle-label {
+                display: none;
             }
         }
     </style>
@@ -903,371 +1656,547 @@
         <div class="container">
             <a href="#" class="logo">SYNAPSE</a>
             <ul>
-                <li><a href="#probleme">Problème</a></li>
-                <li><a href="#solution">Solution</a></li>
-                <li><a href="#comparaison">Comparaison</a></li>
+                <li><a href="#probleme">Le Problème</a></li>
+                <li><a href="#souverainete">Souveraineté</a></li>
+                <li><a href="#agents">Agents IA</a></li>
+                <li><a href="#implementation">Implémentation</a></li>
+                <li><a href="#roles">Rôles</a></li>
                 <li><a href="#statut">Statut</a></li>
                 <li>
-                    <div class="theme-toggle" onclick="toggleTheme()">☀️</div>
+                    <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme">
+                        <div class="toggle-track">
+                            <div class="toggle-knob">
+                                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                 </li>
-                <li><a href="#statut" class="nav-cta">Devenir Pilote →</a></li>
+                <li><a href="#commencer" class="nav-cta">Démarrer →</a></li>
             </ul>
+            <!-- Mobile: theme toggle + CTA (visible only on mobile) -->
+            <div class="nav-mobile-toggle">
+                <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme">
+                    <div class="toggle-track">
+                        <div class="toggle-knob">
+                            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <a href="#commencer" class="nav-cta nav-cta-mobile">Démarrer →</a>
+            </div>
         </div>
     </nav>
 
-    <!-- 1. HERO -->
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-badges">
-            <span class="badge accent">
-                <span class="badge-dot"></span>
-                V1.0 Opérationnelle
-            </span>
-            <span class="badge">Open Source • CC BY-SA 4.0</span>
-            <span class="badge">🇪🇺 Souveraineté européenne</span>
-        </div>
-        
-        <h1>L'<span>Agilité Cognitive</span><br>pour l'ère de l'IA</h1>
-        
-        <p>SYNAPSE place 4 rôles humains au centre, assistés par 4 agents IA.<br>
-        Pour des organisations plus intelligentes, adaptatives et responsables.</p>
-        
-        <div class="hero-buttons">
-            <a href="mailto:synapse-origin@proton.me?subject=Devenir%20Organisation%20Pilote" class="btn btn-primary">
-                🎯 Devenir Organisation Pilote
-            </a>
-            <a href="https://github.com/synapse-origin/synapse-fr" class="btn btn-secondary">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                Documentation
-            </a>
-        </div>
-        
-        <div class="hero-stats">
-            <div class="stat">
-                <div class="stat-value">4</div>
-                <div class="stat-label">Rôles humains</div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badges">
+                    <span class="badge accent">
+                        <span class="badge-dot"></span>
+                        Framework V1.0 Complet
+                    </span>
+                    <span class="badge">Open Source • v1.0</span>
+                    <span class="badge">🇪🇺 Made in Europe</span>
+                </div>
+                <h1>L'<span>Agilité Cognitive</span> pour l'ère de l'IA</h1>
+                <p>SYNAPSE unifie humains et intelligence artificielle pour créer des organisations plus intelligentes, adaptatives et responsables. Framework organisationnel 100% open source.</p>
+                <div class="hero-buttons">
+                    <a href="#commencer" class="btn btn-primary">Découvrir le framework</a>
+                    <a href="https://github.com/synapse-origin/synapse-fr" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                </div>
             </div>
-            <div class="stat">
-                <div class="stat-value">4</div>
-                <div class="stat-label">Agents IA</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">11</div>
-                <div class="stat-label">Métriques</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">0€</div>
-                <div class="stat-label">Cloud requis</div>
+            <div class="hero-visual">
+                <div class="flow-diagram">
+                    <div class="flow-header">
+                        <span class="flow-title">🧠 Flux SYNAPSE</span>
+                        <span class="flow-status">
+                            <span class="badge-dot"></span>
+                            Système actif
+                        </span>
+                    </div>
+                    <div class="flow-steps">
+                        <div class="flow-step">
+                            <div class="flow-icon">🎯</div>
+                            <div class="flow-step-content">
+                                <h4>Intent — Intention claire</h4>
+                                <p>Objectifs explicites et partagés</p>
+                            </div>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-step">
+                            <div class="flow-icon">👁️</div>
+                            <div class="flow-step-content">
+                                <h4>Observation — Agents IA</h4>
+                                <p>Analyse continue et détection</p>
+                            </div>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-step">
+                            <div class="flow-icon">🧠</div>
+                            <div class="flow-step-content">
+                                <h4>Décision — Humains augmentés</h4>
+                                <p>Simulation et choix éclairés</p>
+                            </div>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-step">
+                            <div class="flow-icon">📚</div>
+                            <div class="flow-step-content">
+                                <h4>Apprentissage — Patterns</h4>
+                                <p>Mémoire organisationnelle</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-metrics">
+                        <div class="metric-item">
+                            <div class="metric-value">4</div>
+                            <div class="metric-label">Agents actifs</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">11</div>
+                            <div class="metric-label">Métriques</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">100%</div>
+                            <div class="metric-label">Local</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 2. PROBLÈME -->
+    <!-- Problem Section -->
     <section id="probleme" class="section-alt">
         <div class="section-header">
             <span class="section-label">Le Constat</span>
             <h2>L'agilité classique ne suffit plus</h2>
             <p>Scrum, Kanban, SAFe ont fluidifié la livraison. Mais ils n'ont pas été conçus pour l'ère de l'IA.</p>
         </div>
-        
         <div class="problems-grid">
             <div class="problem-card">
                 <div class="problem-icon">🔄</div>
                 <h3>Rituels devenus des fins en soi</h3>
-                <p>Daily, planning, retro... Ces cérémonies consomment du temps sans toujours créer de valeur.</p>
+                <p>Daily standups, sprint planning, retrospectives... Ces cérémonies consomment du temps sans toujours créer de valeur.</p>
             </div>
             <div class="problem-card">
                 <div class="problem-icon">🧠</div>
                 <h3>Surcharge cognitive</h3>
-                <p>Les équipes sont submergées d'informations à traiter et de décisions à prendre.</p>
+                <p>Les équipes sont submergées d'informations à traiter, de décisions à prendre, de contexte à maintenir.</p>
             </div>
             <div class="problem-card">
                 <div class="problem-icon">⏱️</div>
                 <h3>Cycles trop lents</h3>
-                <p>Les sprints de 2 semaines ne permettent plus de s'adapter assez vite.</p>
+                <p>Les sprints de 2 semaines ne permettent plus de s'adapter assez vite à la complexité croissante.</p>
             </div>
             <div class="problem-card">
                 <div class="problem-icon">🤖</div>
                 <h3>IA absente de l'équation</h3>
-                <p>Ces frameworks ne savent pas intégrer l'intelligence artificielle au cœur des processus.</p>
+                <p>Ces frameworks ont été conçus avant l'IA. Ils ne savent pas intégrer l'intelligence artificielle au cœur des processus.</p>
             </div>
         </div>
     </section>
 
-    <!-- 3. SOLUTION (Rôles + Agents + Boucles) -->
-    <section id="solution" class="solution-section">
+    <!-- Roles Section -->
+    <section id="roles">
         <div class="section-header">
-            <span class="section-label">La Solution</span>
-            <h2>SYNAPSE : Humains au centre, IA en support</h2>
+            <span class="section-label">Organisation</span>
+            <h2>4 rôles humains essentiels</h2>
+            <p>Les humains gardent le contrôle avec des responsabilités claires et des pouvoirs de veto.</p>
         </div>
-        
-        <div class="solution-intro">
-            <p><strong>Le principe fondamental :</strong> Les humains gardent le contrôle avec des pouvoirs de veto. Les agents IA détectent, analysent et proposent. Jamais l'inverse.</p>
-        </div>
-
-        <!-- 3a. 4 Rôles Humains -->
-        <div class="subsection">
-            <div class="subsection-header">
-                <h3>👥 4 Rôles Humains</h3>
-                <p>Responsabilités claires, pouvoirs de veto</p>
-            </div>
-            
-            <div class="roles-grid">
-                <div class="role-card">
-                    <div class="role-icon">🎯</div>
-                    <h4>Intent Architect</h4>
-                    <div class="role-subtitle">Stratégie</div>
-                    <p>Définit et maintient la cohérence stratégique de l'organisation.</p>
-                    <span class="role-veto">Veto stratégique</span>
-                </div>
-                <div class="role-card">
-                    <div class="role-icon">⚖️</div>
-                    <h4>Ethical Guardian</h4>
-                    <div class="role-subtitle">Éthique</div>
-                    <p>Surveille les dérives et audite les décisions IA.</p>
-                    <span class="role-veto">Veto éthique</span>
-                </div>
-                <div class="role-card">
-                    <div class="role-icon">🎛️</div>
-                    <h4>System Orchestrator</h4>
-                    <div class="role-subtitle">Configuration</div>
-                    <p>Configure et optimise le système cognitif.</p>
-                </div>
-                <div class="role-card">
-                    <div class="role-icon">🛠️</div>
-                    <h4>Sovereign Maker</h4>
-                    <div class="role-subtitle">Exécution</div>
-                    <p>Matérialise les décisions dans le réel.</p>
+        <div class="roles-grid">
+            <div class="role-card">
+                <div class="role-icon">🎯</div>
+                <div class="role-content">
+                    <h3>Intent Architect</h3>
+                    <div class="subtitle">Stratégie & Vision</div>
+                    <p>Définit et maintient la cohérence stratégique. Pouvoir de veto si contraire à l'intention.</p>
                 </div>
             </div>
-        </div>
-
-        <!-- 3b. 4 Agents IA -->
-        <div class="subsection">
-            <div class="subsection-header">
-                <h3>🤖 4 Agents IA</h3>
-                <p>Ils proposent, les humains décident</p>
-            </div>
-            
-            <div class="agents-grid">
-                <div class="agent-card">
-                    <span class="agent-status"></span>
-                    <div class="agent-icon">🧠</div>
-                    <h4>Memory Agent</h4>
-                    <div class="agent-subtitle">Mémoire collective</div>
-                    <p>Capture et restitue la connaissance organisationnelle.</p>
-                </div>
-                <div class="agent-card">
-                    <span class="agent-status"></span>
-                    <div class="agent-icon">🔍</div>
-                    <h4>Pattern Agent</h4>
-                    <div class="agent-subtitle">Détection</div>
-                    <p>Identifie blocages récurrents et bonnes pratiques.</p>
-                </div>
-                <div class="agent-card">
-                    <span class="agent-status"></span>
-                    <div class="agent-icon">🎲</div>
-                    <h4>Simulation Agent</h4>
-                    <div class="agent-subtitle">Anticipation</div>
-                    <p>Génère scénarios et probabilités pour les décisions.</p>
-                </div>
-                <div class="agent-card">
-                    <span class="agent-status"></span>
-                    <div class="agent-icon">🔗</div>
-                    <h4>Coordination Agent</h4>
-                    <div class="agent-subtitle">Optimisation</div>
-                    <p>Détecte les blocages et optimise les flux.</p>
+            <div class="role-card">
+                <div class="role-icon">⚖️</div>
+                <div class="role-content">
+                    <h3>Ethical Guardian</h3>
+                    <div class="subtitle">Éthique & Intégrité</div>
+                    <p>Surveille les dérives, audite les décisions IA. Pouvoir de veto si dérive éthique.</p>
                 </div>
             </div>
-        </div>
-
-        <!-- 3c. 3 Boucles -->
-        <div class="subsection">
-            <div class="subsection-header">
-                <h3>🔄 3 Boucles de Feedback</h3>
-                <p>Remplacent les rituels agiles par des événements adaptatifs</p>
+            <div class="role-card">
+                <div class="role-icon">🎛️</div>
+                <div class="role-content">
+                    <h3>System Orchestrator</h3>
+                    <div class="subtitle">Configuration</div>
+                    <p>Configure et optimise le système cognitif. Active/désactive agents selon besoins.</p>
+                </div>
             </div>
-            
-            <div class="loops-grid">
-                <div class="loop-card">
-                    <div class="loop-icon">🎯</div>
-                    <h4>Intent Sync</h4>
-                    <div class="loop-freq">Hebdomadaire • 30-45 min</div>
-                    <p>Vérifie l'alignement stratégique.</p>
-                </div>
-                <div class="loop-card">
-                    <div class="loop-icon">🔍</div>
-                    <h4>Pattern Review</h4>
-                    <div class="loop-freq">Continue + Hebdo</div>
-                    <p>Traite les patterns détectés.</p>
-                </div>
-                <div class="loop-card">
-                    <div class="loop-icon">⚡</div>
-                    <h4>Decision Moment</h4>
-                    <div class="loop-freq">À la demande</div>
-                    <p>Décisions majeures éclairées par simulation.</p>
+            <div class="role-card">
+                <div class="role-icon">🛠️</div>
+                <div class="role-content">
+                    <h3>Sovereign Maker</h3>
+                    <div class="subtitle">Exécution</div>
+                    <p>Matérialise les décisions dans le réel. Garde le contrôle créatif et la responsabilité.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. MÉTRIQUES (condensé) -->
+    <!-- Agents Section -->
+    <section id="agents" class="section-alt">
+        <div class="section-header">
+            <span class="section-label">Intelligence Artificielle</span>
+            <h2>4 agents IA à votre service</h2>
+            <p>Chaque agent a une mission fonctionnelle spécifique définie par le framework. L'implémentation technique est libre.</p>
+        </div>
+        <div class="agents-grid">
+            <div class="agent-card">
+                <div class="agent-icon">🧠</div>
+                <h3>Memory Agent</h3>
+                <div class="subtitle">Mémoire organisationnelle</div>
+                <p>Capture, structure et restitue la connaissance collective. Plus jamais de "on avait déjà essayé ça" sans contexte.</p>
+                <span class="agent-tag framework">Specs Framework</span>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon">🔍</div>
+                <h3>Pattern Agent</h3>
+                <div class="subtitle">Détection de récurrences</div>
+                <p>Identifie les blocages répétés, les goulots d'étranglement et les bonnes pratiques émergentes.</p>
+                <span class="agent-tag framework">Specs Framework</span>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon">🎲</div>
+                <h3>Simulation Agent</h3>
+                <div class="subtitle">Anticipation</div>
+                <p>Génère 3 à 5 scénarios avec probabilités pour chaque décision majeure. Décidez en connaissance de cause.</p>
+                <span class="agent-tag framework">Specs Framework</span>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon">🔗</div>
+                <h3>Coordination Agent</h3>
+                <div class="subtitle">Optimisation des flux</div>
+                <p>Détecte les blocages, suggère des réorganisations, optimise la collaboration sans micro-management.</p>
+                <span class="agent-tag framework">Specs Framework</span>
+            </div>
+        </div>
+        <div style="margin-top: 2rem; padding: 1rem 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius-md); border: 1px solid var(--border-color); max-width: 900px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 0.95rem; color: var(--text-secondary); margin: 0;">
+                <strong style="color: var(--accent-primary);">💡 Implémentation libre :</strong> Ces agents sont des spécifications fonctionnelles du framework. Vous pouvez les implémenter avec Claude Code, n8n, LangChain, ou tout autre outil de votre choix.
+            </p>
+        </div>
+    </section>
+
+    <!-- Loops Section -->
+    <section id="boucles">
+        <div class="section-header">
+            <span class="section-label">Feedback Continu</span>
+            <h2>3 boucles de synchronisation</h2>
+            <p>SYNAPSE remplace les rituels agiles par des boucles adaptatives déclenchées par les événements.</p>
+        </div>
+        <div class="loops-grid">
+            <div class="loop-card">
+                <div class="loop-icon">🎯</div>
+                <h3>Intent Sync</h3>
+                <div class="loop-frequency">Hebdomadaire • 30-45 min</div>
+                <p>Vérifie l'alignement stratégique. L'organisation reste-t-elle fidèle à son intention ?</p>
+            </div>
+            <div class="loop-card">
+                <div class="loop-icon">🔍</div>
+                <h3>Pattern Review</h3>
+                <div class="loop-frequency">Continue + Hebdo • 15-30 min</div>
+                <p>Examine les patterns détectés et décide des actions correctives ou expérimentations.</p>
+            </div>
+            <div class="loop-card">
+                <div class="loop-icon">⚡</div>
+                <h3>Decision Moment</h3>
+                <div class="loop-frequency">À la demande • 30 min - 2h</div>
+                <p>Prend une décision majeure éclairée par simulation et mémoire organisationnelle.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
     <section id="metriques" class="section-alt">
         <div class="section-header">
-            <span class="section-label">Mesure</span>
-            <h2>11 Métriques Cognitives</h2>
-            <p>De nouvelles métriques pour piloter une organisation hybride.</p>
+            <span class="section-label">Mesure & Pilotage</span>
+            <h2>11 métriques cognitives</h2>
+            <p>De nouvelles métriques pour mesurer la santé d'une organisation hybride humains-IA.</p>
         </div>
-        
-        <div class="metrics-card">
-            <div class="metrics-grid">
-                <div class="metrics-category">
-                    <h4>📊 Système</h4>
-                    <ul>
-                        <li>Temps de cohérence</li>
-                        <li>Taux d'adaptation</li>
-                        <li>Mémoire active</li>
-                        <li>Clarté d'intention</li>
-                        <li>Latence de décision</li>
-                    </ul>
-                </div>
-                <div class="metrics-category">
-                    <h4>👤 Humain</h4>
-                    <ul>
-                        <li>Charge cognitive</li>
-                        <li>Autonomie perçue</li>
-                        <li>Confiance système</li>
-                    </ul>
-                </div>
-                <div class="metrics-category">
-                    <h4>💼 Valeur</h4>
-                    <ul>
-                        <li>Time to production</li>
-                        <li>Qualité livrée</li>
-                        <li>Coût d'adaptation</li>
-                    </ul>
-                </div>
+        <div class="metrics-categories">
+            <div class="metrics-category">
+                <h3>📊 Métriques Système</h3>
+                <ul class="metrics-list">
+                    <li>Temps de cohérence</li>
+                    <li>Taux d'adaptation</li>
+                    <li>Mémoire active</li>
+                    <li>Clarté d'intention</li>
+                    <li>Latence de décision</li>
+                </ul>
+            </div>
+            <div class="metrics-category">
+                <h3>👤 Métriques Humaines</h3>
+                <ul class="metrics-list">
+                    <li>Charge cognitive</li>
+                    <li>Autonomie perçue</li>
+                    <li>Confiance système</li>
+                </ul>
+            </div>
+            <div class="metrics-category">
+                <h3>💼 Métriques de Valeur</h3>
+                <ul class="metrics-list">
+                    <li>Time to production</li>
+                    <li>Qualité livrée</li>
+                    <li>Coût d'adaptation</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- 5. COMPARAISON -->
-    <section id="comparaison">
+    <!-- Comparison Section -->
+    <section id="comparaison" class="section-alt">
         <div class="section-header">
             <span class="section-label">Comparaison</span>
             <h2>SYNAPSE vs Agilité classique</h2>
         </div>
-        
-        <table class="comparison-table">
-            <thead>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Agile classique</th>
-                    <th>SYNAPSE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Décisions</td>
-                    <td>Humains seuls</td>
-                    <td class="synapse">Humains + IA en support</td>
-                </tr>
-                <tr>
-                    <td>Adaptation</td>
-                    <td>Cycles fixes (sprints)</td>
-                    <td class="synapse">Continue, événementielle</td>
-                </tr>
-                <tr>
-                    <td>Mémoire</td>
-                    <td>Documentation manuelle</td>
-                    <td class="synapse">Graphe auto-alimenté</td>
-                </tr>
-                <tr>
-                    <td>Patterns</td>
-                    <td>Détectés en retro (trop tard)</td>
-                    <td class="synapse">Détection temps réel</td>
-                </tr>
-                <tr>
-                    <td>Coordination</td>
-                    <td>Réunions quotidiennes</td>
-                    <td class="synapse">Agents IA + alertes ciblées</td>
-                </tr>
-                <tr>
-                    <td>Estimations</td>
-                    <td>Au doigt mouillé</td>
-                    <td class="synapse">Simulation prédictive</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Agile classique</th>
+                        <th>SYNAPSE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Décisions</td>
+                        <td>Humains seuls</td>
+                        <td>Humains + IA</td>
+                    </tr>
+                    <tr>
+                        <td>Adaptation</td>
+                        <td>Cycles fixes (sprints)</td>
+                        <td>Continue (temps réel)</td>
+                    </tr>
+                    <tr>
+                        <td>Mémoire</td>
+                        <td>Documentation manuelle</td>
+                        <td>Graphe auto-généré</td>
+                    </tr>
+                    <tr>
+                        <td>Coordination</td>
+                        <td>Rituels humains</td>
+                        <td>Détection automatique</td>
+                    </tr>
+                    <tr>
+                        <td>Temps réunions</td>
+                        <td>~15-20% du temps</td>
+                        <td>~9-10% du temps</td>
+                    </tr>
+                    <tr>
+                        <td>Souveraineté données</td>
+                        <td>Variable (cloud)</td>
+                        <td>100% local possible</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
-    <!-- 6. SOUVERAINETÉ + IMPLÉMENTATION -->
-    <section id="implementation" class="section-alt">
+    <!-- Implementation Section -->
+    <section id="implementation" class="section">
         <div class="section-header">
-            <span class="section-label">Déploiement</span>
-            <h2>100% souverain, flexible à implémenter</h2>
+            <span class="section-label">Implémentation</span>
+            <h2>Comment adopter SYNAPSE ?</h2>
+            <p>SYNAPSE est un framework organisationnel agnostique sur l'implémentation technique.</p>
         </div>
         
-        <div class="sovereignty-impl">
-            <div class="sov-card">
-                <h3>🇪🇺 Souveraineté des données</h3>
-                <ul class="sov-list">
-                    <li><span class="icon">🏠</span> Déploiement 100% local possible — aucun cloud externe</li>
-                    <li><span class="icon">🔒</span> RGPD by design — anonymisation, droit à l'oubli intégrés</li>
-                    <li><span class="icon">🔓</span> LLMs open source — Ollama, Mistral, Llama en local</li>
-                    <li><span class="icon">📊</span> Vos données restent les vôtres — zéro télémétrie</li>
+        <div class="implementation-options">
+            <div class="implementation-card">
+                <div class="implementation-header">
+                    <span class="implementation-icon">🛠️</span>
+                    <h3>DIY (Do It Yourself)</h3>
+                </div>
+                <p>Utilisez vos outils existants pour implémenter les agents selon les specs du framework :</p>
+                <ul class="implementation-list">
+                    <li>Claude Code avec MCP</li>
+                    <li>n8n pour l'orchestration</li>
+                    <li>APIs LLM (OpenAI, Anthropic, Mistral)</li>
+                    <li>Vos propres solutions custom</li>
                 </ul>
+                <div class="implementation-footer">
+                    <span class="implementation-badge">🔓 Open Source</span>
+                    <span class="implementation-badge">⚡ Immédiat</span>
+                </div>
             </div>
             
-            <div class="sov-card">
-                <h3>🛠️ Comment implémenter ?</h3>
-                <ul class="sov-list">
-                    <li><span class="icon">📖</span> <strong>DIY</strong> — Utilisez vos outils existants selon les specs</li>
-                    <li><span class="icon">🎯</span> <strong>Référence</strong> — Solution clé en main (Q2 2026)</li>
-                    <li><span class="icon">🤝</span> <strong>Accompagnement</strong> — Formation et conseil disponibles</li>
+            <div class="implementation-card featured">
+                <div class="implementation-ribbon">À venir</div>
+                <div class="implementation-header">
+                    <span class="implementation-icon">🎯</span>
+                    <h3>Implémentation de Référence</h3>
+                </div>
+                <p><strong>Disponible Q2 2026</strong></p>
+                <p>Une solution d'implémentation SYNAPSE (cloud et on-premise) sera proposée pour les organisations souhaitant une mise en œuvre clé en main.</p>
+                <ul class="implementation-list">
+                    <li>Configuration guidée des 4 agents</li>
+                    <li>Dashboard métriques cognitives</li>
+                    <li>Templates prêts à l'emploi</li>
+                    <li>Mises à jour automatiques</li>
                 </ul>
+                <div class="implementation-footer">
+                    <span class="implementation-badge">☁️ Cloud & On-Premise</span>
+                </div>
+            </div>
+            
+            <div class="implementation-card">
+                <div class="implementation-header">
+                    <span class="implementation-icon">🤝</span>
+                    <h3>Accompagnement</h3>
+                </div>
+                <p>Formation et conseil disponibles pour :</p>
+                <ul class="implementation-list">
+                    <li>Définir votre Intent Statement</li>
+                    <li>Former vos équipes aux 4 rôles</li>
+                    <li>Configurer vos premiers agents</li>
+                    <li>Valider l'adoption du framework</li>
+                </ul>
+                <div class="implementation-footer">
+                    <span class="implementation-badge">👥 Sur-mesure</span>
+                    <span class="implementation-badge">📞 Support dédié</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 7. STATUT & CTA -->
-    <section id="statut" class="status-cta">
-        <div class="section-header">
-            <span class="section-label">Statut du projet</span>
-            <h2>V1.0 opérationnelle — Pilotes recherchés</h2>
+    <!-- Sovereignty Section -->
+    <section id="souverainete" class="sovereignty-section">
+        <div class="sovereignty-content">
+            <div class="section-header">
+                <span class="section-label">🇪🇺 Souveraineté des données</span>
+                <h2>Conçu pour l'Europe</h2>
+                <p>SYNAPSE est pensé dès l'origine pour répondre aux exigences européennes de protection des données et de souveraineté numérique.</p>
+            </div>
+            <div class="sovereignty-grid">
+                <div class="sovereignty-card">
+                    <h3>🏠 100% Déployable en local</h3>
+                    <p>Installez SYNAPSE sur votre propre infrastructure : Raspberry Pi, serveur dédié, cloud privé. Vos données ne quittent jamais votre périmètre.</p>
+                </div>
+                <div class="sovereignty-card">
+                    <h3>🔒 RGPD by design</h3>
+                    <p>Conformité native avec le Règlement Général sur la Protection des Données. Anonymisation, droit à l'oubli, audit trail intégrés.</p>
+                </div>
+                <div class="sovereignty-card">
+                    <h3>🔓 LLMs Open Source</h3>
+                    <p>Aucune dépendance aux clouds américains. Utilisez Ollama avec des modèles open source (Mistral, Llama) entièrement en local.</p>
+                </div>
+                <div class="sovereignty-card">
+                    <h3>📊 Vos données restent les vôtres</h3>
+                    <p>Pas de télémétrie cachée, pas d'envoi vers des serveurs tiers. Transparence totale sur le traitement des données.</p>
+                </div>
+            </div>
         </div>
-        
+    </section>    
+
+    <!-- Status Section -->
+    <section id="statut">
+        <div class="section-header">
+            <span class="section-label">État du projet</span>
+            <h2>Où en sommes-nous ?</h2>
+            <p>SYNAPSE est un framework complet avec des spécifications détaillées. Nous recherchons maintenant des organisations pilotes pour validation terrain.</p>
+        </div>
         <div class="status-grid">
             <div class="status-card">
-                <h3>✅ Réalisé</h3>
+                <h3>✅ Framework Complet</h3>
                 <ul class="status-list">
-                    <li><span class="status-done">✓</span> 4 agents IA opérationnels</li>
-                    <li><span class="status-done">✓</span> Dashboard métriques cognitives</li>
-                    <li><span class="status-done">✓</span> Système d'audit éthique</li>
-                    <li><span class="status-done">✓</span> API Gateway TypeScript/Fastify</li>
-                    <li><span class="status-done">✓</span> Frontend React complet</li>
-                    <li><span class="status-done">✓</span> Documentation 100k+ mots</li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Spécifications des 4 agents IA (fonctionnel + garde-fous)
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Définition des 4 rôles humains
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Spécifications des 3 boucles de gouvernance
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        11 métriques cognitives définies
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Ethics Compliance System
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Hiérarchie Intent (Organisation → Équipe)
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Templates et outils de démarrage
+                    </li>
+                    <li>
+                        <span class="status-icon done">✓</span>
+                        Documentation complète (100k+ mots)
+                    </li>
                 </ul>
             </div>
             <div class="status-card">
                 <h3>🔄 Prochaines étapes</h3>
                 <ul class="status-list">
-                    <li><span class="status-progress">◐</span> Recherche organisations pilotes</li>
-                    <li><span class="status-planned">○</span> Validation terrain (Q2-Q3 2026)</li>
-                    <li><span class="status-planned">○</span> Publication académique</li>
+                    <li>
+                        <span class="status-icon progress">◐</span>
+                        Recherche organisations pilotes
+                    </li>
+                    <li>
+                        <span class="status-icon planned">○</span>
+                        Validation terrain (Q2-Q3 2026)
+                    </li>
+                    <li>
+                        <span class="status-icon planned">○</span>
+                        Publication académique
+                    </li>
+                    <li>
+                        <span class="status-icon planned">○</span>
+                        Implémentation de référence (Q2 2026)
+                    </li>
                 </ul>
             </div>
         </div>
-        
-        <div class="cta-box">
-            <h3>Devenez organisation pilote</h3>
-            <p>Testez SYNAPSE avec votre équipe. Accompagnement personnalisé, accès prioritaire aux évolutions, influence sur la roadmap.</p>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="commencer" class="cta-section">
+        <div class="cta-content">
+            <h2>Prêt à transformer votre organisation ?</h2>
+            <p>SYNAPSE est 100% open source. La documentation complète est disponible gratuitement. Le framework peut être implémenté dès aujourd'hui.</p>
             <div class="cta-buttons">
-                <a href="mailto:synapse-origin@proton.me?subject=Devenir%20Organisation%20Pilote" class="btn btn-primary">
-                    🎯 Candidater comme pilote
-                </a>
-                <a href="https://github.com/synapse-origin/synapse-fr" class="btn btn-secondary">
-                    Lire la documentation
-                </a>
+                <a href="https://github.com/synapse-origin/synapse-fr" class="btn btn-primary">Accéder au Framework</a>
+                <a href="/cdn-cgi/l/email-protection#4b3832252a3b382e662439222c22250b3b39243f242565262e" class="btn btn-secondary">Devenir Organisation Pilote</a>
             </div>
         </div>
     </section>
@@ -1285,21 +2214,24 @@
                     <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/framework/SYNAPSE-V1.md">Documentation</a></li>
                     <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/docs/getting-started.md">Guide de démarrage</a></li>
                     <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/templates">Templates</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/community/faq.md">FAQ</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>Communauté</h4>
                 <ul>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/discussions">Discussions</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/discussions">Discussions GitHub</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/case-studies">Études de cas</a></li>
                     <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/CONTRIBUTING">Contribuer</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/community/faq.md">FAQ</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/research">Recherche</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>Contact</h4>
                 <ul>
-                    <li><a href="mailto:synapse-origin@proton.me">synapse-origin@proton.me</a></li>
-                    <li><a href="mailto:synapse-origin@proton.me?subject=Devenir%20Pilote">Devenir pilote</a></li>
+                    <li><a href="/cdn-cgi/l/email-protection#97e4eef9f6e7e4f2baf8e5fef0fef9d7e7e5f8e3f8f9b9faf2"><span class="__cf_email__" data-cfemail="9fece6f1feefecfab2f0edf6f8f6f1dfefedf0ebf0f1b1f2fa">[email&#160;protected]</span></a></li>
+                    <li><a href="/cdn-cgi/l/email-protection#394a405758494a5c14564b505e505779494b564d565717545c">Devenir pilote</a></li>
+                    <li><a href="/cdn-cgi/l/email-protection#6e1d17000f1e1d0b43011c070907002e1e1c011a010040030b">Partenariats</a></li>
                 </ul>
             </div>
         </div>
@@ -1308,24 +2240,42 @@
         </div>
     </footer>
 
-    <script>
-        function getTheme() {
-            return localStorage.getItem('theme') || 
-                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    <!-- Theme Toggle Script -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Check for saved theme preference or default to light
+        function getThemePreference() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                return savedTheme;
+            }
+            // Check system preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
         }
 
+        // Apply theme
         function applyTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
-            document.querySelector('.theme-toggle').textContent = theme === 'dark' ? '🌙' : '☀️';
+            
+            // Update toggle icon
+            const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+            const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+            
+            document.querySelectorAll('.toggle-knob').forEach(knob => {
+                knob.innerHTML = theme === 'dark' ? moonIcon : sunIcon;
+            });
         }
 
+        // Toggle theme
         function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            applyTheme(current === 'dark' ? 'light' : 'dark');
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
         }
 
-        document.addEventListener('DOMContentLoaded', () => applyTheme(getTheme()));
-    </script>
-</body>
-</html>
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(getT

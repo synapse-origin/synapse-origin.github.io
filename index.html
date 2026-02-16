@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYNAPSE — Stop Building AI Teams. Start Redesigning Collaboration.</title>
-    <meta name="description" content="SYNAPSE is an open-source organizational framework that unifies humans and AI into a single cognitive system. No more multi-agent chaos.">
+    <meta name="description" content="SYNAPSE is an open-source organizational framework that unifies humans and AI into a single cognitive system. Self-host for free or use SYNAPSE Cloud.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -20,797 +20,172 @@
             --accent: #c4f04d;
             --accent-dim: #8fb830;
             --accent-glow: rgba(196, 240, 77, 0.08);
+            --accent-border: rgba(196, 240, 77, 0.15);
             --border: #222228;
             --border-light: #2a2a32;
             --serif: 'DM Serif Display', Georgia, serif;
             --sans: 'Instrument Sans', -apple-system, sans-serif;
         }
-
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
-
         body {
-            font-family: var(--sans);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.65;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            font-family: var(--sans); background: var(--bg-primary); color: var(--text-primary);
+            line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden;
         }
+        ::selection { background: var(--accent); color: var(--bg-primary); }
 
-        ::selection {
-            background: var(--accent);
-            color: var(--bg-primary);
-        }
-
-        /* NAV */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: 1.25rem 2.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 10, 12, 0.85);
-            backdrop-filter: blur(20px);
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1.25rem 2.5rem; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
-            transition: all 0.3s ease;
         }
-
-        .nav-logo {
-            font-family: var(--sans);
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 0.15em;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .nav-logo span {
-            color: var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            transition: color 0.2s;
-        }
-
+        .nav-logo { font-family: var(--sans); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.15em; color: var(--text-primary); text-decoration: none; }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
         .nav-links a:hover { color: var(--text-primary); }
-
-        .nav-cta {
-            background: var(--accent) !important;
-            color: var(--bg-primary) !important;
-            padding: 0.5rem 1.25rem;
-            border-radius: 4px;
-            font-weight: 600 !important;
-            transition: opacity 0.2s !important;
-        }
-
+        .nav-cta { background: var(--accent) !important; color: var(--bg-primary) !important; padding: 0.5rem 1.25rem; border-radius: 4px; font-weight: 600 !important; transition: opacity 0.2s !important; }
         .nav-cta:hover { opacity: 0.85; }
+        .nav-mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
 
-        .nav-mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 8rem 2.5rem 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--accent-glow);
-            border: 1px solid rgba(196, 240, 77, 0.15);
-            padding: 0.4rem 1rem;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--accent);
-            width: fit-content;
-            margin-bottom: 2.5rem;
-            animation: fadeInUp 0.8s ease both;
-        }
-
-        .hero h1 {
-            font-family: var(--serif);
-            font-size: clamp(2.8rem, 6.5vw, 5.2rem);
-            line-height: 1.08;
-            font-weight: 400;
-            max-width: 900px;
-            animation: fadeInUp 0.8s ease 0.1s both;
-        }
-
-        .hero h1 em {
-            font-style: italic;
-            color: var(--accent);
-        }
-
-        .hero-sub {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 620px;
-            margin-top: 2rem;
-            line-height: 1.7;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 3rem;
-            animation: fadeInUp 0.8s ease 0.3s both;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--bg-primary);
-            padding: 0.85rem 2rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            font-family: var(--sans);
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-glow); border: 1px solid var(--accent-border); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 500; color: var(--accent); width: fit-content; margin-bottom: 2.5rem; animation: fadeInUp 0.8s ease both; }
+        .hero-badge .pulse { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+        .hero h1 { font-family: var(--serif); font-size: clamp(2.8rem, 6.5vw, 5.2rem); line-height: 1.08; font-weight: 400; max-width: 900px; animation: fadeInUp 0.8s ease 0.1s both; }
+        .hero h1 em { font-style: italic; color: var(--accent); }
+        .hero-sub { font-size: 1.2rem; color: var(--text-secondary); max-width: 620px; margin-top: 2rem; line-height: 1.7; animation: fadeInUp 0.8s ease 0.2s both; }
+        .hero-actions { display: flex; gap: 1rem; margin-top: 3rem; flex-wrap: wrap; animation: fadeInUp 0.8s ease 0.3s both; }
+        .btn-primary { background: var(--accent); color: var(--bg-primary); padding: 0.85rem 2rem; border: none; border-radius: 4px; font-size: 0.95rem; font-weight: 600; font-family: var(--sans); cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
         .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            padding: 0.85rem 2rem;
-            border: 1px solid var(--border-light);
-            border-radius: 4px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            font-family: var(--sans);
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
+        .btn-secondary { background: transparent; color: var(--text-primary); padding: 0.85rem 2rem; border: 1px solid var(--border-light); border-radius: 4px; font-size: 0.95rem; font-weight: 500; font-family: var(--sans); cursor: pointer; text-decoration: none; transition: all 0.2s; }
         .btn-secondary:hover { border-color: var(--text-muted); }
+        .hero-proof { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; animation: fadeInUp 0.8s ease 0.45s both; }
+        .hero-proof-item { display: flex; flex-direction: column; }
+        .hero-proof-item strong { font-family: var(--serif); font-size: 1.8rem; color: var(--accent); }
+        .hero-proof-item span { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 0.08em; }
 
-        .hero-proof {
-            display: flex;
-            gap: 3rem;
-            margin-top: 4rem;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--border);
-            animation: fadeInUp 0.8s ease 0.45s both;
-            flex-wrap: wrap;
-        }
+        section { padding: 7rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); font-weight: 600; margin-bottom: 1.5rem; }
+        .section-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; max-width: 700px; margin-bottom: 1.5rem; }
+        .section-subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; line-height: 1.7; margin-bottom: 3.5rem; }
 
-        .hero-proof-item {
-            display: flex;
-            flex-direction: column;
-        }
+        .problem-section { border-top: 1px solid var(--border); }
+        .problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .problem-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 2.25rem; transition: all 0.3s ease; }
+        .problem-card:hover { border-color: var(--border-light); background: var(--bg-card-hover); }
+        .problem-card .card-number { font-family: var(--serif); font-size: 2rem; color: var(--text-muted); opacity: 0.4; margin-bottom: 1rem; }
+        .problem-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; }
+        .problem-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; }
 
-        .hero-proof-item strong {
-            font-family: var(--serif);
-            font-size: 1.8rem;
-            color: var(--accent);
-        }
-
-        .hero-proof-item span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 0.2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        /* SECTIONS */
-        section {
-            padding: 7rem 2.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-title {
-            font-family: var(--serif);
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            line-height: 1.15;
-            max-width: 700px;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            line-height: 1.7;
-            margin-bottom: 3.5rem;
-        }
-
-        /* PROBLEM SECTION */
-        .problem-section {
-            border-top: 1px solid var(--border);
-        }
-
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .problem-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2.25rem;
-            transition: all 0.3s ease;
-        }
-
-        .problem-card:hover {
-            border-color: var(--border-light);
-            background: var(--bg-card-hover);
-        }
-
-        .problem-card .card-number {
-            font-family: var(--serif);
-            font-size: 2rem;
-            color: var(--text-muted);
-            opacity: 0.4;
-            margin-bottom: 1rem;
-        }
-
-        .problem-card h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-        }
-
-        .problem-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.65;
-        }
-
-        /* REFRAME SECTION */
-        .reframe-section {
-            border-top: 1px solid var(--border);
-        }
-
-        .reframe-block {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .reframe-block::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-        }
-
-        .reframe-columns {
-            display: grid;
-            grid-template-columns: 1fr 40px 1fr;
-            gap: 2rem;
-            align-items: start;
-        }
-
-        .reframe-col h3 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
+        .reframe-section { border-top: 1px solid var(--border); }
+        .reframe-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 4rem; position: relative; overflow: hidden; }
+        .reframe-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
+        .reframe-columns { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 2rem; align-items: start; }
+        .reframe-col h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.5rem; font-weight: 600; }
         .reframe-col.old h3 { color: var(--text-muted); }
         .reframe-col.new h3 { color: var(--accent); }
-
-        .reframe-col p {
-            font-family: var(--serif);
-            font-size: 1.55rem;
-            line-height: 1.4;
-        }
-
+        .reframe-col p { font-family: var(--serif); font-size: 1.55rem; line-height: 1.4; }
         .reframe-col.old p { color: var(--text-muted); }
         .reframe-col.new p { color: var(--text-primary); }
+        .reframe-arrow { display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--accent); padding-top: 2rem; }
 
-        .reframe-arrow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--accent);
-            padding-top: 2rem;
-        }
-
-        /* APPROACH */
-        .approach-section {
-            border-top: 1px solid var(--border);
-        }
-
-        .approach-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .flow-step {
-            padding: 2.5rem 2rem;
-            border-right: 1px solid var(--border);
-            position: relative;
-            transition: background 0.3s;
-        }
-
+        .approach-section { border-top: 1px solid var(--border); }
+        .approach-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .flow-step { padding: 2.5rem 2rem; border-right: 1px solid var(--border); transition: background 0.3s; }
         .flow-step:last-child { border-right: none; }
         .flow-step:hover { background: var(--bg-card); }
+        .flow-step-number { font-family: var(--serif); font-size: 3rem; color: var(--accent); opacity: 0.3; line-height: 1; margin-bottom: 1.25rem; }
+        .flow-step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; }
+        .flow-step p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
 
-        .flow-step-number {
-            font-family: var(--serif);
-            font-size: 3rem;
-            color: var(--accent);
-            opacity: 0.3;
-            line-height: 1;
-            margin-bottom: 1.25rem;
-        }
+        .framework-section { border-top: 1px solid var(--border); }
+        .framework-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .framework-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 2.25rem; transition: all 0.3s; }
+        .framework-card:hover { border-color: var(--border-light); background: var(--bg-card-hover); }
+        .framework-card .card-icon { font-size: 1.6rem; margin-bottom: 1.25rem; display: block; }
+        .framework-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.6rem; }
+        .framework-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
 
-        .flow-step h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .flow-step p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* WHAT YOU GET */
-        .framework-section {
-            border-top: 1px solid var(--border);
-        }
-
-        .framework-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .framework-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2.25rem;
-            transition: all 0.3s;
-        }
-
-        .framework-card:hover {
-            border-color: var(--border-light);
-            background: var(--bg-card-hover);
-        }
-
-        .framework-card .card-icon {
-            font-size: 1.6rem;
-            margin-bottom: 1.25rem;
-            display: block;
-        }
-
-        .framework-card h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.6rem;
-        }
-
-        .framework-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* COMPARISON TABLE */
-        .compare-section {
-            border-top: 1px solid var(--border);
-        }
-
-        .compare-table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .compare-table th,
-        .compare-table td {
-            text-align: left;
-            padding: 1.1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.92rem;
-        }
-
-        .compare-table th {
-            background: var(--bg-card);
-            font-weight: 600;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-secondary);
-        }
-
+        .compare-section { border-top: 1px solid var(--border); }
+        .compare-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .compare-table th, .compare-table td { text-align: left; padding: 1.1rem 1.5rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+        .compare-table th { background: var(--bg-card); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
         .compare-table th:last-child { color: var(--accent); }
-
-        .compare-table td {
-            color: var(--text-secondary);
-        }
-
-        .compare-table td:first-child {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .compare-table td:last-child {
-            color: var(--text-primary);
-        }
-
+        .compare-table td { color: var(--text-secondary); }
+        .compare-table td:first-child { color: var(--text-primary); font-weight: 500; }
+        .compare-table td:last-child { color: var(--text-primary); }
         .compare-table tr:last-child td { border-bottom: none; }
-
         .compare-table tr:hover td { background: var(--bg-card); }
 
-        /* STATUS */
-        .status-section {
-            border-top: 1px solid var(--border);
-        }
+        .pricing-section { border-top: 1px solid var(--border); }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .pricing-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 2.5rem; display: flex; flex-direction: column; transition: all 0.3s; }
+        .pricing-card:hover { border-color: var(--border-light); background: var(--bg-card-hover); }
+        .pricing-card.featured { border-color: var(--accent-border); background: linear-gradient(180deg, rgba(196, 240, 77, 0.03) 0%, var(--bg-card) 100%); position: relative; }
+        .pricing-card.featured::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); border-radius: 10px 10px 0 0; }
+        .pricing-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 1rem; display: inline-block; padding: 0.3rem 0.75rem; border-radius: 100px; width: fit-content; }
+        .pricing-tag.free { background: rgba(255,255,255,0.05); color: var(--text-secondary); }
+        .pricing-tag.beta { background: var(--accent-glow); border: 1px solid var(--accent-border); color: var(--accent); }
+        .pricing-tag.custom { background: rgba(255,255,255,0.05); color: var(--text-secondary); }
+        .pricing-card h3 { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .pricing-price { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .pricing-desc { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 2rem; flex-grow: 1; }
+        .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .pricing-features li { font-size: 0.87rem; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 0.6rem; }
+        .pricing-features .check { color: var(--accent); flex-shrink: 0; font-size: 0.85rem; }
+        .pricing-card .btn-primary, .pricing-card .btn-secondary { width: 100%; justify-content: center; text-align: center; }
 
-        .status-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
-        }
-
-        .status-done, .status-next {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2.5rem;
-        }
-
-        .status-done h3, .status-next h3 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.75rem;
-            font-weight: 600;
-        }
-
+        .status-section { border-top: 1px solid var(--border); }
+        .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+        .status-done, .status-next { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; }
+        .status-done h3, .status-next h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.75rem; font-weight: 600; }
         .status-done h3 { color: var(--accent); }
         .status-next h3 { color: var(--text-muted); }
+        .status-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+        .status-list li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.92rem; color: var(--text-secondary); }
+        .status-list .check { color: var(--accent); font-weight: bold; flex-shrink: 0; }
+        .status-list .pending { color: var(--text-muted); flex-shrink: 0; }
 
-        .status-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.9rem;
-        }
+        .sovereignty-bar { border-top: 1px solid var(--border); padding: 4rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .sovereignty-inner { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+        .sovereignty-inner h3 { font-family: var(--serif); font-size: 1.3rem; white-space: nowrap; }
+        .sovereignty-tags { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .sovereignty-tag { background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px; padding: 0.5rem 1.2rem; font-size: 0.82rem; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem; }
 
-        .status-list li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 0.92rem;
-            color: var(--text-secondary);
-        }
+        .cta-section { border-top: 1px solid var(--border); text-align: center; padding: 8rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .cta-section .section-title { margin-left: auto; margin-right: auto; max-width: 600px; }
+        .cta-section .section-subtitle { margin-left: auto; margin-right: auto; }
+        .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
-        .status-list .check {
-            color: var(--accent);
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .status-list .pending {
-            color: var(--text-muted);
-            flex-shrink: 0;
-        }
-
-        /* GET STARTED */
-        .start-section {
-            border-top: 1px solid var(--border);
-        }
-
-        .start-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .start-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2.5rem;
-            transition: all 0.3s;
-        }
-
-        .start-card:hover {
-            border-color: var(--border-light);
-            background: var(--bg-card-hover);
-        }
-
-        .start-card .card-tag {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 1.25rem;
-            display: block;
-        }
-
-        .start-card h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .start-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .start-card .card-link {
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            transition: gap 0.2s;
-        }
-
-        .start-card .card-link:hover { gap: 0.6rem; }
-
-        /* SOVEREIGNTY (secondary) */
-        .sovereignty-bar {
-            border-top: 1px solid var(--border);
-            padding: 4rem 2.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .sovereignty-inner {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .sovereignty-inner h3 {
-            font-family: var(--serif);
-            font-size: 1.3rem;
-            white-space: nowrap;
-        }
-
-        .sovereignty-tags {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .sovereignty-tag {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            padding: 0.5rem 1.2rem;
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* CTA FINAL */
-        .cta-section {
-            border-top: 1px solid var(--border);
-            text-align: center;
-            padding: 8rem 2.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .cta-section .section-title {
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 600px;
-        }
-
-        .cta-section .section-subtitle {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-actions {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 4rem 2.5rem 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            gap: 3rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-brand {
-            max-width: 300px;
-        }
-
-        .footer-brand .nav-logo {
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        .footer-brand p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        .footer-cols {
-            display: flex;
-            gap: 4rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-col h4 {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .footer-col ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .footer-col a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-        }
-
+        footer { border-top: 1px solid var(--border); padding: 4rem 2.5rem 3rem; max-width: 1200px; margin: 0 auto; }
+        .footer-top { display: flex; justify-content: space-between; gap: 3rem; margin-bottom: 3rem; flex-wrap: wrap; }
+        .footer-brand { max-width: 300px; }
+        .footer-brand .nav-logo { display: block; margin-bottom: 1rem; }
+        .footer-brand p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; font-style: italic; }
+        .footer-cols { display: flex; gap: 4rem; flex-wrap: wrap; }
+        .footer-col h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 1rem; font-weight: 600; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+        .footer-col a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
         .footer-col a:hover { color: var(--text-primary); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        .footer-bottom p { font-size: 0.78rem; color: var(--text-muted); }
 
-        .footer-bottom {
-            border-top: 1px solid var(--border);
-            padding-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        .footer-bottom p {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-        }
-
-        /* ANIMATIONS */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* RESPONSIVE */
         @media (max-width: 900px) {
             nav { padding: 1rem 1.5rem; }
             .nav-links { display: none; }
-            .nav-links.open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--bg-primary);
-                border-bottom: 1px solid var(--border);
-                padding: 1.5rem;
-                gap: 1.25rem;
-            }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-primary); border-bottom: 1px solid var(--border); padding: 1.5rem; gap: 1.25rem; }
             .nav-mobile-toggle { display: block; }
-
             .hero { padding: 7rem 1.5rem 3rem; }
             section { padding: 5rem 1.5rem; }
-            .problem-grid { grid-template-columns: 1fr; }
+            .problem-grid, .framework-grid, .pricing-grid, .status-grid { grid-template-columns: 1fr; }
             .approach-flow { grid-template-columns: 1fr 1fr; }
             .flow-step { border-right: none; border-bottom: 1px solid var(--border); }
-            .flow-step:nth-child(2n) { border-right: none; }
-            .flow-step:nth-child(2) { border-right: none; }
-            .framework-grid { grid-template-columns: 1fr; }
-            .start-grid { grid-template-columns: 1fr; }
-            .status-grid { grid-template-columns: 1fr; }
             .reframe-columns { grid-template-columns: 1fr; gap: 1rem; }
             .reframe-arrow { transform: rotate(90deg); padding: 0; }
             .reframe-block { padding: 2.5rem 2rem; }
@@ -818,7 +193,6 @@
             .cta-section { padding: 5rem 1.5rem; }
             footer { padding: 3rem 1.5rem 2rem; }
         }
-
         @media (max-width: 600px) {
             .approach-flow { grid-template-columns: 1fr; }
             .flow-step { border-right: none; border-bottom: 1px solid var(--border); }
@@ -828,303 +202,209 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
     <a href="#" class="nav-logo">SYNAPSE<span>.</span></a>
-    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">☰</button>
+    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
     <ul class="nav-links">
         <li><a href="#problem">The Problem</a></li>
         <li><a href="#approach">Approach</a></li>
         <li><a href="#framework">Framework</a></li>
+        <li><a href="#pricing">Pricing</a></li>
         <li><a href="#status">Status</a></li>
-        <li><a href="https://github.com/synapse-origin/synapse-fr" class="nav-cta">GitHub →</a></li>
+        <li><a href="https://github.com/synapse-origin/synapse-en" class="nav-cta">GitHub &rarr;</a></li>
     </ul>
 </nav>
 
-<!-- HERO -->
 <header class="hero">
-    <div class="hero-badge">Open Source Framework • v1.0</div>
+    <div class="hero-badge"><span class="pulse"></span> Cloud Beta — Signup open</div>
     <h1>Stop building AI&nbsp;teams.<br>Start redesigning <em>collaboration.</em></h1>
     <p class="hero-sub">Everyone's assembling multi-agent swarms. Research shows most will fail. SYNAPSE is an organizational framework that unifies humans and AI into a single cognitive system — instead of replicating human limitations in AI&nbsp;architecture.</p>
     <div class="hero-actions">
-        <a href="https://github.com/synapse-origin/synapse-fr" class="btn-primary">Read the framework →</a>
-        <a href="#approach" class="btn-secondary">How it works</a>
+        <a href="#pricing" class="btn-primary">Join the Cloud Beta &rarr;</a>
+        <a href="https://github.com/synapse-origin/synapse-en" class="btn-secondary">Self-host for free</a>
     </div>
     <div class="hero-proof">
-        <div class="hero-proof-item">
-            <strong>4</strong>
-            <span>AI Agent Specs</span>
-        </div>
-        <div class="hero-proof-item">
-            <strong>4</strong>
-            <span>Human Roles</span>
-        </div>
-        <div class="hero-proof-item">
-            <strong>11</strong>
-            <span>Cognitive Metrics</span>
-        </div>
-        <div class="hero-proof-item">
-            <strong>100K+</strong>
-            <span>Words of Documentation</span>
-        </div>
+        <div class="hero-proof-item"><strong>4</strong><span>AI Agent Specs</span></div>
+        <div class="hero-proof-item"><strong>4</strong><span>Human Roles</span></div>
+        <div class="hero-proof-item"><strong>11</strong><span>Cognitive Metrics</span></div>
+        <div class="hero-proof-item"><strong>100K+</strong><span>Words of Docs</span></div>
     </div>
 </header>
 
-<!-- PROBLEM -->
 <section class="problem-section reveal" id="problem">
     <div class="section-label">The Problem</div>
     <h2 class="section-title">Multi-agent AI is organizational debt disguised as&nbsp;architecture</h2>
-    <p class="section-subtitle">The industry is racing to build AI agent swarms. But the failures aren't technical — they're structural. We're projecting human limitations onto a technology that doesn't share them.</p>
-
+    <p class="section-subtitle">The industry is racing to build AI agent swarms. But the failures aren't technical — they're structural.</p>
     <div class="problem-grid">
-        <div class="problem-card">
-            <div class="card-number">01</div>
-            <h3>Errors cascade, not cancel</h3>
-            <p>For sequential tasks — which is most of what teams actually do — adding more agents makes things worse. Each handoff introduces drift, ambiguity, and compounding failures.</p>
-        </div>
-        <div class="problem-card">
-            <div class="card-number">02</div>
-            <h3>Coordination eats the gain</h3>
-            <p>Research shows the effective ceiling is 3-4 agents before communication overhead outpaces reasoning value. Beyond that, you're paying for coordination, not intelligence.</p>
-        </div>
-        <div class="problem-card">
-            <div class="card-number">03</div>
-            <h3>You're blindfolding what can see</h3>
-            <p>An AI that can process an entire codebase doesn't need to be split into a "research agent" and a "review agent." That fragmentation destroys its core advantage: holistic&nbsp;understanding.</p>
-        </div>
-        <div class="problem-card">
-            <div class="card-number">04</div>
-            <h3>Agile wasn't built for this</h3>
-            <p>Scrum, Kanban, SAFe optimized human coordination. But they have no model for integrating a non-human cognitive partner that doesn't share our constraints of attention, fatigue, or specialization.</p>
-        </div>
+        <div class="problem-card"><div class="card-number">01</div><h3>Errors cascade, not cancel</h3><p>For sequential tasks — which is most of what teams actually do — adding more agents makes things worse. Each handoff introduces drift, ambiguity, and compounding failures.</p></div>
+        <div class="problem-card"><div class="card-number">02</div><h3>Coordination eats the gain</h3><p>Research shows the effective ceiling is 3-4 agents before communication overhead outpaces reasoning value. Beyond that, you're paying for coordination, not intelligence.</p></div>
+        <div class="problem-card"><div class="card-number">03</div><h3>You're blindfolding what can see</h3><p>An AI that can process an entire codebase doesn't need to be split into a "research agent" and a "review agent." That fragmentation destroys its core advantage: holistic&nbsp;understanding.</p></div>
+        <div class="problem-card"><div class="card-number">04</div><h3>Agile wasn't built for this</h3><p>Scrum, Kanban, SAFe optimized human coordination. But they have no model for integrating a non-human cognitive partner that doesn't share our constraints of attention, fatigue, or specialization.</p></div>
     </div>
 </section>
 
-<!-- REFRAME -->
 <section class="reframe-section reveal">
     <div class="section-label">The Shift</div>
     <h2 class="section-title">It's not a technology problem. It's an org&nbsp;design problem.</h2>
     <p class="section-subtitle">The question isn't "how many agents do we need?" — it's "how do we redesign collaboration when one side of the team has fundamentally different capabilities?"</p>
-
     <div class="reframe-block">
         <div class="reframe-columns">
-            <div class="reframe-col old">
-                <h3>Current approach</h3>
-                <p>"Let's build an AI team that mirrors our org chart — a research agent, a writing agent, a review agent, an orchestrator..."</p>
-            </div>
-            <div class="reframe-arrow">→</div>
-            <div class="reframe-col new">
-                <h3>SYNAPSE approach</h3>
-                <p>"Let's define how one AI partner collaborates with humans at graduated levels of autonomy — based on task type, risk, and trust."</p>
-            </div>
+            <div class="reframe-col old"><h3>Current approach</h3><p>"Let's build an AI team that mirrors our org chart — a research agent, a writing agent, a review agent, an orchestrator..."</p></div>
+            <div class="reframe-arrow">&rarr;</div>
+            <div class="reframe-col new"><h3>SYNAPSE approach</h3><p>"Let's define how one AI partner collaborates with humans at graduated levels of autonomy — based on task type, risk, and trust."</p></div>
         </div>
     </div>
 </section>
 
-<!-- APPROACH -->
 <section class="approach-section reveal" id="approach">
     <div class="section-label">How It Works</div>
     <h2 class="section-title">A cognitive loop, not a&nbsp;pipeline</h2>
     <p class="section-subtitle">SYNAPSE replaces fixed agile rituals with adaptive feedback loops driven by events, not calendars.</p>
-
     <div class="approach-flow">
-        <div class="flow-step">
-            <div class="flow-step-number">01</div>
-            <h3>Intent</h3>
-            <p>Start with explicit, shared objectives. No ambiguity about what the organization is trying to achieve and why.</p>
-        </div>
-        <div class="flow-step">
-            <div class="flow-step-number">02</div>
-            <h3>Observation</h3>
-            <p>AI agents continuously analyze patterns, detect recurring blockers, and surface signals humans would miss.</p>
-        </div>
-        <div class="flow-step">
-            <div class="flow-step-number">03</div>
-            <h3>Decision</h3>
-            <p>Humans decide — but augmented by simulations, scenarios, and organizational memory. Informed choices, not gut&nbsp;calls.</p>
-        </div>
-        <div class="flow-step">
-            <div class="flow-step-number">04</div>
-            <h3>Learning</h3>
-            <p>Every decision feeds back into organizational memory. The system gets smarter. Patterns compound over&nbsp;time.</p>
-        </div>
+        <div class="flow-step"><div class="flow-step-number">01</div><h3>Intent</h3><p>Start with explicit, shared objectives. No ambiguity about what the organization is trying to achieve and why.</p></div>
+        <div class="flow-step"><div class="flow-step-number">02</div><h3>Observation</h3><p>AI agents continuously analyze patterns, detect recurring blockers, and surface signals humans would miss.</p></div>
+        <div class="flow-step"><div class="flow-step-number">03</div><h3>Decision</h3><p>Humans decide — but augmented by simulations, scenarios, and organizational memory. Informed choices, not gut&nbsp;calls.</p></div>
+        <div class="flow-step"><div class="flow-step-number">04</div><h3>Learning</h3><p>Every decision feeds back into organizational memory. The system gets smarter. Patterns compound over&nbsp;time.</p></div>
     </div>
 </section>
 
-<!-- FRAMEWORK -->
 <section class="framework-section reveal" id="framework">
-    <div class="section-label">What You Get</div>
+    <div class="section-label">What's Inside</div>
     <h2 class="section-title">A complete organizational framework — not another&nbsp;tool</h2>
-    <p class="section-subtitle">SYNAPSE specifies roles, agents, governance loops, and metrics. You implement with whatever tools fit your stack.</p>
-
+    <p class="section-subtitle">SYNAPSE specifies roles, agents, governance loops, and metrics. Self-host it for free or let us run it for you.</p>
     <div class="framework-grid">
-        <div class="framework-card">
-            <span class="card-icon">🎯</span>
-            <h3>4 Human Roles</h3>
-            <p>Intent Architect, Ethical Guardian, System Orchestrator, Sovereign Maker. Clear responsibilities with explicit veto powers. Humans stay in control.</p>
-        </div>
-        <div class="framework-card">
-            <span class="card-icon">🧠</span>
-            <h3>4 AI Agent Specs</h3>
-            <p>Memory, Pattern, Simulation, and Coordination agents — defined as functional specs, not code. Implement them with Claude, GPT, Mistral, or anything else.</p>
-        </div>
-        <div class="framework-card">
-            <span class="card-icon">🔄</span>
-            <h3>3 Governance Loops</h3>
-            <p>Intent Sync, Pattern Review, Decision Moment. Adaptive rhythms triggered by events, not sprints. Meetings drop from ~18% to ~9% of team&nbsp;time.</p>
-        </div>
-        <div class="framework-card">
-            <span class="card-icon">📊</span>
-            <h3>11 Cognitive Metrics</h3>
-            <p>Measure what matters in a human-AI system: cognitive load, decision latency, adaptation rate, system trust, intention clarity, and&nbsp;more.</p>
-        </div>
-        <div class="framework-card">
-            <span class="card-icon">⚖️</span>
-            <h3>Ethics Compliance</h3>
-            <p>Built-in guardrails for every AI agent. Bias detection, escalation protocols, and human override at every layer. Not an afterthought.</p>
-        </div>
-        <div class="framework-card">
-            <span class="card-icon">📐</span>
-            <h3>Graduated Autonomy</h3>
-            <p>A 4-level progression model that defines how much autonomy AI gets based on task complexity, risk level, and accumulated trust.</p>
-        </div>
+        <div class="framework-card"><span class="card-icon">&#127919;</span><h3>4 Human Roles</h3><p>Intent Architect, Ethical Guardian, System Orchestrator, Sovereign Maker. Clear responsibilities with explicit veto powers. Humans stay in control.</p></div>
+        <div class="framework-card"><span class="card-icon">&#129504;</span><h3>4 AI Agent Specs</h3><p>Memory, Pattern, Simulation, and Coordination agents — defined as functional specs, not code. Implement them with Claude, GPT, Mistral, or anything else.</p></div>
+        <div class="framework-card"><span class="card-icon">&#128260;</span><h3>3 Governance Loops</h3><p>Intent Sync, Pattern Review, Decision Moment. Adaptive rhythms triggered by events, not sprints. Meetings drop from ~18% to ~9% of team&nbsp;time.</p></div>
+        <div class="framework-card"><span class="card-icon">&#128202;</span><h3>11 Cognitive Metrics</h3><p>Measure what matters in a human-AI system: cognitive load, decision latency, adaptation rate, system trust, intention clarity, and&nbsp;more.</p></div>
+        <div class="framework-card"><span class="card-icon">&#9878;&#65039;</span><h3>Ethics Compliance</h3><p>Built-in guardrails for every AI agent. Bias detection, escalation protocols, and human override at every layer. Not an afterthought.</p></div>
+        <div class="framework-card"><span class="card-icon">&#128208;</span><h3>Graduated Autonomy</h3><p>A 4-level progression model that defines how much autonomy AI gets based on task complexity, risk level, and accumulated trust.</p></div>
     </div>
 </section>
 
-<!-- COMPARISON -->
 <section class="compare-section reveal">
     <div class="section-label">Comparison</div>
     <h2 class="section-title">SYNAPSE vs. traditional agile</h2>
     <p class="section-subtitle">Not a replacement — an evolution for the AI era.</p>
-
     <table class="compare-table">
-        <thead>
-            <tr>
-                <th>Dimension</th>
-                <th>Traditional Agile</th>
-                <th>SYNAPSE</th>
-            </tr>
-        </thead>
+        <thead><tr><th>Dimension</th><th>Traditional Agile</th><th>SYNAPSE</th></tr></thead>
         <tbody>
-            <tr>
-                <td>Decisions</td>
-                <td>Humans alone</td>
-                <td>Humans + AI simulation</td>
-            </tr>
-            <tr>
-                <td>Adaptation</td>
-                <td>Fixed cycles (sprints)</td>
-                <td>Continuous, event-driven</td>
-            </tr>
-            <tr>
-                <td>Memory</td>
-                <td>Manual documentation</td>
-                <td>Auto-generated knowledge graph</td>
-            </tr>
-            <tr>
-                <td>Coordination</td>
-                <td>Human rituals</td>
-                <td>AI-detected, human-decided</td>
-            </tr>
-            <tr>
-                <td>Meeting time</td>
-                <td>~15-20% of team time</td>
-                <td>~9-10% of team time</td>
-            </tr>
-            <tr>
-                <td>AI integration</td>
-                <td>Bolt-on tools</td>
-                <td>Native cognitive partner</td>
-            </tr>
+            <tr><td>Decisions</td><td>Humans alone</td><td>Humans + AI simulation</td></tr>
+            <tr><td>Adaptation</td><td>Fixed cycles (sprints)</td><td>Continuous, event-driven</td></tr>
+            <tr><td>Memory</td><td>Manual documentation</td><td>Auto-generated knowledge graph</td></tr>
+            <tr><td>Coordination</td><td>Human rituals</td><td>AI-detected, human-decided</td></tr>
+            <tr><td>Meeting time</td><td>~15-20% of team time</td><td>~9-10% of team time</td></tr>
+            <tr><td>AI integration</td><td>Bolt-on tools</td><td>Native cognitive partner</td></tr>
         </tbody>
     </table>
 </section>
 
-<!-- STATUS -->
+<section class="pricing-section reveal" id="pricing">
+    <div class="section-label">Choose Your Path</div>
+    <h2 class="section-title">Open source at the core. Cloud when you need&nbsp;it.</h2>
+    <p class="section-subtitle">Like n8n or GitLab — the framework is free forever. We handle the infrastructure when you'd rather focus on your team.</p>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <span class="pricing-tag free">Community</span>
+            <h3>Self-Hosted</h3>
+            <p class="pricing-price">Free &amp; open source — forever</p>
+            <p class="pricing-desc">The complete SYNAPSE framework on your own infrastructure. Full control, full sovereignty. Perfect for technical teams and early adopters who want to explore and customize.</p>
+            <ul class="pricing-features">
+                <li><span class="check">&#10003;</span> Full framework specs &amp; documentation</li>
+                <li><span class="check">&#10003;</span> All 4 AI agent specifications</li>
+                <li><span class="check">&#10003;</span> Templates, guides &amp; getting started kit</li>
+                <li><span class="check">&#10003;</span> Deploy on your infra (Raspberry Pi to cloud)</li>
+                <li><span class="check">&#10003;</span> Use any LLM (Claude, GPT, Mistral, Llama)</li>
+                <li><span class="check">&#10003;</span> Community support via GitHub</li>
+            </ul>
+            <a href="https://github.com/synapse-origin/synapse-en" class="btn-secondary">Browse on GitHub</a>
+        </div>
+        <div class="pricing-card featured">
+            <span class="pricing-tag beta">Cloud Beta</span>
+            <h3>SYNAPSE Cloud</h3>
+            <p class="pricing-price">Free during beta &middot; Paid plans coming</p>
+            <p class="pricing-desc">Everything in Community, managed for you. No setup, no maintenance. Get your team running on SYNAPSE in minutes, not weeks. Currently in private beta — sign up for early access.</p>
+            <ul class="pricing-features">
+                <li><span class="check">&#10003;</span> Everything in Community</li>
+                <li><span class="check">&#10003;</span> Guided setup &amp; onboarding</li>
+                <li><span class="check">&#10003;</span> Cognitive metrics dashboard</li>
+                <li><span class="check">&#10003;</span> Pre-configured agent templates</li>
+                <li><span class="check">&#10003;</span> Automatic updates</li>
+                <li><span class="check">&#10003;</span> Priority support</li>
+            </ul>
+            <a href="mailto:contact@synapse-origin.com" class="btn-primary">Request Beta Access &rarr;</a>
+        </div>
+        <div class="pricing-card">
+            <span class="pricing-tag custom">Enterprise</span>
+            <h3>Dedicated</h3>
+            <p class="pricing-price">Custom pricing</p>
+            <p class="pricing-desc">On-premise deployment with hands-on support. We help your organization adopt SYNAPSE end-to-end — from intent definition to full team rollout, with workshops, coaching, and dedicated SLA.</p>
+            <ul class="pricing-features">
+                <li><span class="check">&#10003;</span> Everything in Cloud</li>
+                <li><span class="check">&#10003;</span> On-premise or private cloud deployment</li>
+                <li><span class="check">&#10003;</span> Custom agent configuration</li>
+                <li><span class="check">&#10003;</span> Workshop: define your Intent Statement</li>
+                <li><span class="check">&#10003;</span> Team training on the 4 roles</li>
+                <li><span class="check">&#10003;</span> Dedicated SLA &amp; support</li>
+            </ul>
+            <a href="mailto:contact@synapse-origin.com" class="btn-secondary">Contact us</a>
+        </div>
+    </div>
+</section>
+
 <section class="status-section reveal" id="status">
     <div class="section-label">Project Status</div>
-    <h2 class="section-title">Framework complete. Seeking pilot&nbsp;organizations.</h2>
-    <p class="section-subtitle">SYNAPSE v1.0 is fully specified with detailed documentation. We're now looking for teams ready to validate it in the field.</p>
-
+    <h2 class="section-title">Framework complete. Cloud in beta. Seeking pilot&nbsp;teams.</h2>
+    <p class="section-subtitle">SYNAPSE v1.0 is fully specified. The Cloud platform is entering private beta. We're looking for teams ready to be among the first.</p>
     <div class="status-grid">
         <div class="status-done">
-            <h3>✓ Completed</h3>
+            <h3>&#10003; Completed</h3>
             <ul class="status-list">
-                <li><span class="check">✓</span> 4 AI agent specifications (functional + guardrails)</li>
-                <li><span class="check">✓</span> 4 human roles with veto powers</li>
-                <li><span class="check">✓</span> 3 adaptive governance loops</li>
-                <li><span class="check">✓</span> 11 cognitive metrics defined</li>
-                <li><span class="check">✓</span> Ethics compliance system</li>
-                <li><span class="check">✓</span> Intent hierarchy (Org → Team)</li>
-                <li><span class="check">✓</span> Graduated autonomy model</li>
-                <li><span class="check">✓</span> 100K+ words of documentation</li>
+                <li><span class="check">&#10003;</span> 4 AI agent specifications (functional + guardrails)</li>
+                <li><span class="check">&#10003;</span> 4 human roles with veto powers</li>
+                <li><span class="check">&#10003;</span> 3 adaptive governance loops</li>
+                <li><span class="check">&#10003;</span> 11 cognitive metrics defined</li>
+                <li><span class="check">&#10003;</span> Ethics compliance system</li>
+                <li><span class="check">&#10003;</span> Graduated autonomy model (4 levels)</li>
+                <li><span class="check">&#10003;</span> 100K+ words of documentation</li>
+                <li><span class="check">&#10003;</span> Cloud platform development</li>
             </ul>
         </div>
         <div class="status-next">
-            <h3>◇ Next steps</h3>
+            <h3>&#9671; Next Steps</h3>
             <ul class="status-list">
-                <li><span class="pending">◐</span> Pilot organizations (recruiting now)</li>
-                <li><span class="pending">○</span> Field validation (Q2-Q3 2026)</li>
-                <li><span class="pending">○</span> Academic publication</li>
-                <li><span class="pending">○</span> Reference implementation (Q2 2026)</li>
+                <li><span class="pending">&#9680;</span> Cloud private beta (now open)</li>
+                <li><span class="pending">&#9680;</span> Pilot organizations (recruiting)</li>
+                <li><span class="pending">&#9675;</span> Field validation (Q2-Q3 2026)</li>
+                <li><span class="pending">&#9675;</span> Academic publication</li>
+                <li><span class="pending">&#9675;</span> Cloud general availability</li>
             </ul>
         </div>
     </div>
 </section>
 
-<!-- GET STARTED -->
-<section class="start-section reveal" id="start">
-    <div class="section-label">Get Started</div>
-    <h2 class="section-title">Three paths to SYNAPSE</h2>
-    <p class="section-subtitle">Whether you want to explore, implement, or get hands-on support.</p>
-
-    <div class="start-grid">
-        <div class="start-card">
-            <span class="card-tag">Open Source</span>
-            <h3>DIY Implementation</h3>
-            <p>Use the full framework specs to implement SYNAPSE with your existing tools — Claude Code, n8n, any LLM API, or your own custom&nbsp;stack.</p>
-            <a href="https://github.com/synapse-origin/synapse-fr" class="card-link">Browse on GitHub →</a>
-        </div>
-        <div class="start-card">
-            <span class="card-tag">Coming Q2 2026</span>
-            <h3>Reference Implementation</h3>
-            <p>A turnkey SYNAPSE solution — cloud and on-premise — with guided setup, cognitive dashboard, ready-made templates, and automatic&nbsp;updates.</p>
-            <a href="#" class="card-link">Get notified →</a>
-        </div>
-        <div class="start-card">
-            <span class="card-tag">Available Now</span>
-            <h3>Workshops & Coaching</h3>
-            <p>Hands-on sessions to define your Intent Statement, train your team on the 4 roles, configure your first agents, and validate&nbsp;adoption.</p>
-            <a href="mailto:contact@synapse-origin.com" class="card-link">Get in touch →</a>
-        </div>
-    </div>
-</section>
-
-<!-- SOVEREIGNTY BAR -->
 <div class="sovereignty-bar reveal">
     <div class="sovereignty-inner">
-        <h3>🇪🇺 Built for sovereignty</h3>
+        <h3>&#127466;&#127482; Built for sovereignty</h3>
         <div class="sovereignty-tags">
-            <div class="sovereignty-tag">🏠 100% self-hostable</div>
-            <div class="sovereignty-tag">🔒 GDPR by design</div>
-            <div class="sovereignty-tag">🔓 Open-source LLMs supported</div>
-            <div class="sovereignty-tag">📊 Your data stays yours</div>
+            <div class="sovereignty-tag">&#127968; 100% self-hostable</div>
+            <div class="sovereignty-tag">&#128274; GDPR by design</div>
+            <div class="sovereignty-tag">&#128275; Open-source LLMs supported</div>
+            <div class="sovereignty-tag">&#128202; Your data stays yours</div>
         </div>
     </div>
 </div>
 
-<!-- CTA FINAL -->
 <section class="cta-section reveal">
     <div class="section-label">Join the shift</div>
     <h2 class="section-title">Ready to redesign how your team works with&nbsp;AI?</h2>
-    <p class="section-subtitle">SYNAPSE is 100% open source. The full documentation is free. Start reading today — or become a pilot organization and help shape what's&nbsp;next.</p>
+    <p class="section-subtitle">Self-host for free today, or sign up for the Cloud beta and get running in minutes. Either way, the framework is yours.</p>
     <div class="cta-actions">
-        <a href="https://github.com/synapse-origin/synapse-fr" class="btn-primary">Read the framework →</a>
-        <a href="mailto:contact@synapse-origin.com" class="btn-secondary">Become a pilot org</a>
+        <a href="mailto:contact@synapse-origin.com" class="btn-primary">Request Beta Access &rarr;</a>
+        <a href="https://github.com/synapse-origin/synapse-en" class="btn-secondary">Browse on GitHub</a>
     </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
     <div class="footer-top">
         <div class="footer-brand">
@@ -1135,47 +415,40 @@
             <div class="footer-col">
                 <h4>Framework</h4>
                 <ul>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/framework/SYNAPSE-V1.md">Documentation</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/docs/getting-started.md">Getting Started</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/templates">Templates</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/community/faq.md">FAQ</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-en">Documentation</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-en">Getting Started</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-en">Templates</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-en">FAQ</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Community</h4>
                 <ul>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/discussions">Discussions</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/case-studies">Case Studies</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/blob/main/CONTRIBUTING">Contribute</a></li>
-                    <li><a href="https://github.com/synapse-origin/synapse-fr/tree/main/research">Research</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-en/discussions">Discussions</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-en">Contribute</a></li>
+                    <li><a href="https://github.com/synapse-origin/synapse-en">Research</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Contact</h4>
+                <h4>Product</h4>
                 <ul>
-                    <li><a href="mailto:contact@synapse-origin.com">contact@synapse-origin.com</a></li>
-                    <li><a href="mailto:contact@synapse-origin.com">Become a pilot</a></li>
+                    <li><a href="mailto:contact@synapse-origin.com">Cloud Beta</a></li>
+                    <li><a href="mailto:contact@synapse-origin.com">Enterprise</a></li>
                     <li><a href="mailto:contact@synapse-origin.com">Partnerships</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>© 2025-2026 SYNAPSE Origin. Framework licensed under CC BY-SA 4.0</p>
-        <p>Made with 🧠 in France</p>
+        <p>&copy; 2025-2026 SYNAPSE Origin. Framework licensed under CC BY-SA 4.0</p>
+        <p>Made with &#129504; in France</p>
     </div>
 </footer>
 
-<!-- SCROLL REVEAL -->
 <script>
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 

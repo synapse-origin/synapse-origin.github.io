@@ -5,212 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYNAPSE — Arrêtez de construire des équipes IA. Repensez la collaboration.</title>
     <meta name="description" content="SYNAPSE est un framework organisationnel open-source qui unifie humains et IA en un système cognitif unique. Auto-hébergez gratuitement ou utilisez SYNAPSE Cloud.">
+    <meta property="og:title" content="SYNAPSE — Framework d'Agilité Cognitive">
+    <meta property="og:description" content="Arrêtez de construire des équipes IA. Repensez la collaboration. Un framework organisationnel open-source pour l'ère de l'IA.">
+    <meta property="og:image" content="https://synapse-origin.github.io/og-image.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://synapse-origin.github.io/fr/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #0a0a0c;
-            --bg-secondary: #111116;
-            --bg-card: #16161c;
-            --bg-card-hover: #1c1c24;
-            --text-primary: #e8e6e1;
-            --text-secondary: #9a9890;
-            --text-muted: #5c5b56;
-            --accent: #c4f04d;
-            --accent-dim: #8fb830;
-            --accent-glow: rgba(196, 240, 77, 0.08);
-            --accent-border: rgba(196, 240, 77, 0.15);
-            --border: #222228;
-            --border-light: #2a2a32;
-            --serif: 'DM Serif Display', Georgia, serif;
-            --sans: 'Instrument Sans', -apple-system, sans-serif;
-        }
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: var(--sans); background: var(--bg-primary); color: var(--text-primary);
-            line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden;
-        }
-        ::selection { background: var(--accent); color: var(--bg-primary); }
-
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 1.25rem 2.5rem; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-        }
-        .nav-logo { font-family: var(--sans); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.15em; color: var(--text-primary); text-decoration: none; }
-        .nav-logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--text-primary); }
-        .nav-cta { background: var(--accent) !important; color: var(--bg-primary) !important; padding: 0.5rem 1.25rem; border-radius: 4px; font-weight: 600 !important; transition: opacity 0.2s !important; }
-        .nav-cta:hover { opacity: 0.85; }
-        .nav-mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
-
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
-        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-glow); border: 1px solid var(--accent-border); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 500; color: var(--accent); width: fit-content; margin-bottom: 2.5rem; animation: fadeInUp 0.8s ease both; }
-        .hero-badge .pulse { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
-        .hero h1 { font-family: var(--serif); font-size: clamp(2.8rem, 6.5vw, 5.2rem); line-height: 1.08; font-weight: 400; max-width: 900px; animation: fadeInUp 0.8s ease 0.1s both; }
-        .hero h1 em { font-style: italic; color: var(--accent); }
-        .hero-sub { font-size: 1.2rem; color: var(--text-secondary); max-width: 620px; margin-top: 2rem; line-height: 1.7; animation: fadeInUp 0.8s ease 0.2s both; }
-        .hero-actions { display: flex; gap: 1rem; margin-top: 3rem; flex-wrap: wrap; animation: fadeInUp 0.8s ease 0.3s both; }
-        .btn-primary { background: var(--accent); color: var(--bg-primary); padding: 0.85rem 2rem; border: none; border-radius: 4px; font-size: 0.95rem; font-weight: 600; font-family: var(--sans); cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
-        .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
-        .btn-secondary { background: transparent; color: var(--text-primary); padding: 0.85rem 2rem; border: 1px solid var(--border-light); border-radius: 4px; font-size: 0.95rem; font-weight: 500; font-family: var(--sans); cursor: pointer; text-decoration: none; transition: all 0.2s; }
-        .btn-secondary:hover { border-color: var(--text-muted); }
-        .hero-proof { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; animation: fadeInUp 0.8s ease 0.45s both; }
-        .hero-proof-item { display: flex; flex-direction: column; }
-        .hero-proof-item strong { font-family: var(--serif); font-size: 1.8rem; color: var(--accent); }
-        .hero-proof-item span { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 0.08em; }
-
-        section { padding: 7rem 2.5rem; max-width: 1200px; margin: 0 auto; }
-        .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); font-weight: 600; margin-bottom: 1.5rem; }
-        .section-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; max-width: 700px; margin-bottom: 1.5rem; }
-        .section-subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; line-height: 1.7; margin-bottom: 3.5rem; }
-
-        .problem-section { border-top: 1px solid var(--border); }
-        .problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-        .problem-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 2.25rem; transition: all 0.3s ease; }
-        .problem-card:hover { border-color: var(--border-light); background: var(--bg-card-hover); }
-        .problem-card .card-number { font-family: var(--serif); font-size: 2rem; color: var(--text-muted); opacity: 0.4; margin-bottom: 1rem; }
-        .problem-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; }
-        .problem-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; }
-
-        .reframe-section { border-top: 1px solid var(--border); }
-        .reframe-block { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 4rem; position: relative; overflow: hidden; }
-        .reframe-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
-        .reframe-columns { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 2rem; align-items: start; }
-        .reframe-col h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.5rem; font-weight: 600; }
-        .reframe-col.old h3 { color: var(--text-muted); }
-        .reframe-col.new h3 { color: var(--accent); }
-        .reframe-col p { font-family: var(--serif); font-size: 1.55rem; line-height: 1.4; }
-        .reframe-col.old p { color: var(--text-muted); }
-        .reframe-col.new p { color: var(--text-primary); }
-        .reframe-arrow { display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--accent); padding-top: 2rem; }
-
-        .approach-section { border-top: 1px solid var(--border); }
-        .approach-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-        .flow-step { padding: 2.5rem 2rem; border-right: 1px solid var(--border); transition: background 0.3s; }
-        .flow-step:last-child { border-right: none; }
-        .flow-step:hover { background: var(--bg-card); }
-        .flow-step-number { font-family: var(--serif); font-size: 3rem; color: var(--accent); opacity: 0.3; line-height: 1; margin-bottom: 1.25rem; }
-        .flow-step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; }
-        .flow-step p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
-
-        .framework-section { border-top: 1px solid var(--border); }
-        .framework-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .framework-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 2.25rem; transition: all 0.3s; }
-        .framework-card:hover { border-color: var(--border-light); background: var(--bg-card-hover); }
-        .framework-card .card-icon { font-size: 1.6rem; margin-bottom: 1.25rem; display: block; }
-        .framework-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.6rem; }
-        .framework-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
-
-        .compare-section { border-top: 1px solid var(--border); }
-        .compare-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-        .compare-table th, .compare-table td { text-align: left; padding: 1.1rem 1.5rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
-        .compare-table th { background: var(--bg-card); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
-        .compare-table th:last-child { color: var(--accent); }
-        .compare-table td { color: var(--text-secondary); }
-        .compare-table td:first-child { color: var(--text-primary); font-weight: 500; }
-        .compare-table td:last-child { color: var(--text-primary); }
-        .compare-table tr:last-child td { border-bottom: none; }
-        .compare-table tr:hover td { background: var(--bg-card); }
-
-        .pricing-section { border-top: 1px solid var(--border); }
-        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .pricing-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 2.5rem; display: flex; flex-direction: column; transition: all 0.3s; }
-        .pricing-card:hover { border-color: var(--border-light); background: var(--bg-card-hover); }
-        .pricing-card.featured { border-color: var(--accent-border); background: linear-gradient(180deg, rgba(196, 240, 77, 0.03) 0%, var(--bg-card) 100%); position: relative; }
-        .pricing-card.featured::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); border-radius: 10px 10px 0 0; }
-        .pricing-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 1rem; display: inline-block; padding: 0.3rem 0.75rem; border-radius: 100px; width: fit-content; }
-        .pricing-tag.free { background: rgba(255,255,255,0.05); color: var(--text-secondary); }
-        .pricing-tag.beta { background: var(--accent-glow); border: 1px solid var(--accent-border); color: var(--accent); }
-        .pricing-tag.custom { background: rgba(255,255,255,0.05); color: var(--text-secondary); }
-        .pricing-card h3 { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .pricing-price { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; }
-        .pricing-desc { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 2rem; flex-grow: 1; }
-        .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
-        .pricing-features li { font-size: 0.87rem; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 0.6rem; }
-        .pricing-features .check { color: var(--accent); flex-shrink: 0; font-size: 0.85rem; }
-        .pricing-card .btn-primary, .pricing-card .btn-secondary { width: 100%; justify-content: center; text-align: center; }
-
-        .status-section { border-top: 1px solid var(--border); }
-        .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-        .status-done, .status-next { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; }
-        .status-done h3, .status-next h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.75rem; font-weight: 600; }
-        .status-done h3 { color: var(--accent); }
-        .status-next h3 { color: var(--text-muted); }
-        .status-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
-        .status-list li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.92rem; color: var(--text-secondary); }
-        .status-list .check { color: var(--accent); font-weight: bold; flex-shrink: 0; }
-        .status-list .pending { color: var(--text-muted); flex-shrink: 0; }
-
-        .sovereignty-bar { border-top: 1px solid var(--border); padding: 4rem 2.5rem; max-width: 1200px; margin: 0 auto; }
-        .sovereignty-inner { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
-        .sovereignty-inner h3 { font-family: var(--serif); font-size: 1.3rem; white-space: nowrap; }
-        .sovereignty-tags { display: flex; gap: 1rem; flex-wrap: wrap; }
-        .sovereignty-tag { background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px; padding: 0.5rem 1.2rem; font-size: 0.82rem; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem; }
-
-        .cta-section { border-top: 1px solid var(--border); text-align: center; padding: 8rem 2.5rem; max-width: 1200px; margin: 0 auto; }
-        .cta-section .section-title { margin-left: auto; margin-right: auto; max-width: 600px; }
-        .cta-section .section-subtitle { margin-left: auto; margin-right: auto; }
-        .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-
-        footer { border-top: 1px solid var(--border); padding: 4rem 2.5rem 3rem; max-width: 1200px; margin: 0 auto; }
-        .footer-top { display: flex; justify-content: space-between; gap: 3rem; margin-bottom: 3rem; flex-wrap: wrap; }
-        .footer-brand { max-width: 300px; }
-        .footer-brand .nav-logo { display: block; margin-bottom: 1rem; }
-        .footer-brand p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; font-style: italic; }
-        .footer-cols { display: flex; gap: 4rem; flex-wrap: wrap; }
-        .footer-col h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 1rem; font-weight: 600; }
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-        .footer-col a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-        .footer-col a:hover { color: var(--text-primary); }
-        .footer-bottom { border-top: 1px solid var(--border); padding-top: 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-        .footer-bottom p { font-size: 0.78rem; color: var(--text-muted); }
-
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 900px) {
-            nav { padding: 1rem 1.5rem; }
-            .nav-links { display: none; }
-            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-primary); border-bottom: 1px solid var(--border); padding: 1.5rem; gap: 1.25rem; }
-            .nav-mobile-toggle { display: block; }
-            .hero { padding: 7rem 1.5rem 3rem; }
-            section { padding: 5rem 1.5rem; }
-            .problem-grid, .framework-grid, .pricing-grid, .status-grid { grid-template-columns: 1fr; }
-            .approach-flow { grid-template-columns: 1fr 1fr; }
-            .flow-step { border-right: none; border-bottom: 1px solid var(--border); }
-            .reframe-columns { grid-template-columns: 1fr; gap: 1rem; }
-            .reframe-arrow { transform: rotate(90deg); padding: 0; }
-            .reframe-block { padding: 2.5rem 2rem; }
-            .sovereignty-bar { padding: 3rem 1.5rem; }
-            .cta-section { padding: 5rem 1.5rem; }
-            footer { padding: 3rem 1.5rem 2rem; }
-        }
-        @media (max-width: 600px) {
-            .approach-flow { grid-template-columns: 1fr; }
-            .flow-step { border-right: none; border-bottom: 1px solid var(--border); }
-            .hero-proof { gap: 2rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
 <nav>
-    <a href="#" class="nav-logo">SYNAPSE<span>.</span></a>
+    <a href="/fr/" class="nav-logo">SYNAPSE<span>.</span></a>
     <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
     <ul class="nav-links">
         <li><a href="#problem">Le Problème</a></li>
         <li><a href="#approach">Approche</a></li>
         <li><a href="#framework">Framework</a></li>
+        <li><a href="#platform">Plateforme</a></li>
         <li><a href="#pricing">Tarifs</a></li>
         <li><a href="#status">Statut</a></li>
+        <li><a href="/" class="nav-lang">EN</a></li>
         <li><a href="https://github.com/synapse-origin/synapse-fr" class="nav-cta">GitHub &rarr;</a></li>
     </ul>
 </nav>
@@ -224,7 +41,7 @@
         <a href="https://github.com/synapse-origin/synapse-fr" class="btn-secondary">Auto-héberger gratuitement</a>
     </div>
     <div class="hero-proof">
-        <div class="hero-proof-item"><strong>4</strong><span>Specs d'agents IA</span></div>
+        <div class="hero-proof-item"><strong>7</strong><span>Agents IA</span></div>
         <div class="hero-proof-item"><strong>4</strong><span>Rôles humains</span></div>
         <div class="hero-proof-item"><strong>11</strong><span>Métriques cognitives</span></div>
         <div class="hero-proof-item"><strong>100K+</strong><span>Mots de documentation</span></div>
@@ -258,13 +75,55 @@
 
 <section class="approach-section reveal" id="approach">
     <div class="section-label">Comment ça marche</div>
-    <h2 class="section-title">Une boucle cognitive, pas un&nbsp;pipeline</h2>
-    <p class="section-subtitle">SYNAPSE remplace les rituels agiles figés par des boucles de rétroaction adaptatives déclenchées par les événements, pas par le calendrier.</p>
+    <h2 class="section-title">Trois couches, une boucle&nbsp;continue</h2>
+    <p class="section-subtitle">SYNAPSE organise la collaboration humain-IA en trois couches qui s'alimentent mutuellement en continu — pas en cycles figés.</p>
     <div class="approach-flow">
-        <div class="flow-step"><div class="flow-step-number">01</div><h3>Intention</h3><p>Commencer par des objectifs explicites et partagés. Aucune ambiguïté sur ce que l'organisation cherche à accomplir et pourquoi.</p></div>
-        <div class="flow-step"><div class="flow-step-number">02</div><h3>Observation</h3><p>Les agents IA analysent en continu les patterns, détectent les blocages récurrents et font émerger des signaux que les humains manqueraient.</p></div>
-        <div class="flow-step"><div class="flow-step-number">03</div><h3>Décision</h3><p>Les humains décident — mais augmentés par des simulations, des scénarios et la mémoire organisationnelle. Des choix éclairés, pas de l'instinct.</p></div>
-        <div class="flow-step"><div class="flow-step-number">04</div><h3>Apprentissage</h3><p>Chaque décision alimente la mémoire organisationnelle. Le système s'améliore. Les patterns se renforcent avec le&nbsp;temps.</p></div>
+        <div class="flow-step">
+            <div class="flow-step-number">01</div>
+            <h3><span class="layer-tag">Couche 1 — Humains</span>Intention</h3>
+            <p>Définir des objectifs explicites et partagés. Formaliser l'intention stratégique. L'Architecte d'Intention et le Gardien Éthique fixent la direction et les&nbsp;garde-fous.</p>
+        </div>
+        <div class="flow-step">
+            <div class="flow-step-number">02</div>
+            <h3><span class="layer-tag">Couche 2 — IA + Humains</span>Cognition</h3>
+            <p>Les agents IA analysent les patterns, détectent les dérives, lancent des simulations et mobilisent la mémoire organisationnelle. Les humains reçoivent des options éclairées, pas des données&nbsp;brutes.</p>
+        </div>
+        <div class="flow-step">
+            <div class="flow-step-number">03</div>
+            <h3><span class="layer-tag">Couche 3 — Humains + IA</span>Exécution</h3>
+            <p>Les Créateurs Souverains matérialisent les décisions. L'Agent de Coordination optimise les flux, détecte les blocages et propose des ajustements de&nbsp;tâches.</p>
+        </div>
+        <div class="feedback-loop">
+            <span class="loop-arrow">&#8592;</span> Feedback continu via 3 boucles de gouvernance : Sync d'Intention &middot; Revue de Patterns &middot; Moment de Décision <span class="loop-arrow">&#8592;</span>
+        </div>
+    </div>
+</section>
+
+<section class="impact-section reveal">
+    <div class="section-label">Impact mesuré</div>
+    <h2 class="section-title">Des chiffres qui comptent, pas des story&nbsp;points</h2>
+    <p class="section-subtitle">Basé sur le modèle de métriques cognitives SYNAPSE — conçu pour remplacer la vélocité par des indicateurs de santé organisationnelle significatifs.</p>
+    <div class="impact-grid">
+        <div class="impact-card">
+            <div class="impact-number">10x</div>
+            <div class="impact-label">Décisions plus rapides</div>
+            <div class="impact-detail">Mémoire + Simulation = choix éclairés en heures, pas en semaines</div>
+        </div>
+        <div class="impact-card">
+            <div class="impact-number">-40%</div>
+            <div class="impact-label">Time to production</div>
+            <div class="impact-detail">L'Agent de Coordination élimine les blocages invisibles</div>
+        </div>
+        <div class="impact-card">
+            <div class="impact-number">-50%</div>
+            <div class="impact-label">Coût des pivots</div>
+            <div class="impact-detail">La Simulation accélère les changements de direction stratégique</div>
+        </div>
+        <div class="impact-card">
+            <div class="impact-number">-40%</div>
+            <div class="impact-label">Temps en réunion</div>
+            <div class="impact-detail">Les boucles adaptatives remplacent les rituels agiles figés</div>
+        </div>
     </div>
 </section>
 
@@ -273,12 +132,100 @@
     <h2 class="section-title">Un framework organisationnel complet — pas un outil de&nbsp;plus</h2>
     <p class="section-subtitle">SYNAPSE spécifie les rôles, les agents, les boucles de gouvernance et les métriques. Auto-hébergez-le gratuitement ou laissez-nous le gérer pour vous.</p>
     <div class="framework-grid">
-        <div class="framework-card"><span class="card-icon">&#127919;</span><h3>4 Rôles humains</h3><p>Architecte d'Intention, Gardien Éthique, Orchestrateur Système, Créateur Souverain. Des responsabilités claires avec des pouvoirs de veto explicites. L'humain garde le contrôle.</p></div>
-        <div class="framework-card"><span class="card-icon">&#129504;</span><h3>4 Specs d'agents IA</h3><p>Agents Mémoire, Pattern, Simulation et Coordination — définis comme des spécifications fonctionnelles, pas du code. Implémentez-les avec Claude, GPT, Mistral ou tout autre modèle.</p></div>
-        <div class="framework-card"><span class="card-icon">&#128260;</span><h3>3 Boucles de gouvernance</h3><p>Sync d'Intention, Revue de Patterns, Moment de Décision. Des rythmes adaptatifs déclenchés par les événements, pas les sprints. Les réunions passent de ~18% à ~9% du temps&nbsp;équipe.</p></div>
-        <div class="framework-card"><span class="card-icon">&#128202;</span><h3>11 Métriques cognitives</h3><p>Mesurez ce qui compte dans un système humain-IA : charge cognitive, latence décisionnelle, taux d'adaptation, confiance système, clarté d'intention, et&nbsp;plus.</p></div>
-        <div class="framework-card"><span class="card-icon">&#9878;&#65039;</span><h3>Conformité éthique</h3><p>Des garde-fous intégrés pour chaque agent IA. Détection de biais, protocoles d'escalade et override humain à chaque niveau. Pas une réflexion après coup.</p></div>
-        <div class="framework-card"><span class="card-icon">&#128208;</span><h3>Autonomie graduée</h3><p>Un modèle de progression à 4 niveaux qui définit le degré d'autonomie de l'IA selon la complexité de la tâche, le niveau de risque et la confiance accumulée.</p></div>
+        <div class="framework-card">
+            <span class="card-icon">&#127919;</span>
+            <h3>4 Rôles humains</h3>
+            <p>Architecte d'Intention, Gardien Éthique, Orchestrateur Système, Créateur Souverain. Des responsabilités claires avec des pouvoirs de veto explicites. L'humain garde le contrôle.</p>
+        </div>
+        <div class="framework-card">
+            <span class="card-icon">&#129504;</span>
+            <h3>7 Agents IA</h3>
+            <p>Mémoire, Pattern, Simulation, Coordination, IntentSync, BiasDetection et Orchestrator — définis comme des spécifications fonctionnelles, pas du code. Implémentez-les avec Claude, GPT, Mistral ou tout autre modèle.</p>
+        </div>
+        <div class="framework-card">
+            <span class="card-icon">&#128260;</span>
+            <h3>3 Boucles de gouvernance</h3>
+            <p>Sync d'Intention, Revue de Patterns, Moment de Décision. Des rythmes adaptatifs déclenchés par les événements, pas les sprints. Les réunions passent de ~18% à ~9% du temps&nbsp;équipe.</p>
+        </div>
+        <div class="framework-card">
+            <span class="card-icon">&#128202;</span>
+            <h3>11 Métriques cognitives</h3>
+            <p>Mesurez ce qui compte dans un système humain-IA — pas la vélocité ou le burndown, mais la vraie santé organisationnelle.</p>
+            <div class="metrics-categories">
+                <div class="metric-cat">
+                    <h4>Système (5)</h4>
+                    <p>Time to Coherence, Taux d'Adaptation, Mémoire Active, Clarté d'Intention, Latence Décisionnelle</p>
+                </div>
+                <div class="metric-cat">
+                    <h4>Humain (3)</h4>
+                    <p>Charge Cognitive, Autonomie Perçue, Confiance Système</p>
+                </div>
+                <div class="metric-cat">
+                    <h4>Valeur (3)</h4>
+                    <p>Time to Production, Qualité Livrée, Coût d'Adaptation</p>
+                </div>
+            </div>
+        </div>
+        <div class="framework-card">
+            <span class="card-icon">&#9878;&#65039;</span>
+            <h3>Charte éthique</h3>
+            <p>8 principes non-négociables : transparence obligatoire, droit de veto humain, protection des données, anti-discrimination, droit de contester, limites de surveillance, consentement éclairé et responsabilité humaine. Plus 8 droits des employés dont le droit à la déconnexion et le droit d'audit.</p>
+        </div>
+        <div class="framework-card">
+            <span class="card-icon">&#128208;</span>
+            <h3>Autonomie graduée</h3>
+            <p>Un modèle de progression à 4 niveaux qui définit le degré d'autonomie de l'IA selon la complexité de la tâche, le niveau de risque et la confiance accumulée. Tout agent peut être mis en pause ou désactivé à tout moment.</p>
+        </div>
+    </div>
+</section>
+
+<section class="platform-section reveal" id="platform">
+    <div class="section-label">La Plateforme</div>
+    <h2 class="section-title">Pas juste un framework — une application&nbsp;complète</h2>
+    <p class="section-subtitle">SYNAPSE Cloud donne vie au framework avec une plateforme complète. Auto-hébergez ou laissez-nous la gérer pour vous.</p>
+    <div class="platform-grid">
+        <div class="platform-card">
+            <div class="screenshot-placeholder"><span>Capture : Chat IA</span></div>
+            <div class="platform-card-content">
+                <h3>IA Conversationnelle</h3>
+                <p>Dialoguez avec votre partenaire IA organisationnel. Réponses en streaming, conversations multi-tours, contexte organisationnel complet.</p>
+            </div>
+        </div>
+        <div class="platform-card">
+            <div class="screenshot-placeholder"><span>Capture : Graphe de Connaissances</span></div>
+            <div class="platform-card-content">
+                <h3>Graphe de Connaissances</h3>
+                <p>Visualisation interactive des relations entre intentions, décisions, entités et patterns détectés.</p>
+            </div>
+        </div>
+        <div class="platform-card">
+            <div class="screenshot-placeholder"><span>Capture : Dashboard</span></div>
+            <div class="platform-card-content">
+                <h3>Dashboards par rôle</h3>
+                <p>Chacun des 4 rôles dispose d'un dashboard dédié centré sur ses responsabilités et son périmètre de décision.</p>
+            </div>
+        </div>
+        <div class="platform-card">
+            <div class="screenshot-placeholder"><span>Capture : Brief Quotidien</span></div>
+            <div class="platform-card-content">
+                <h3>Brief Quotidien</h3>
+                <p>Synthèse quotidienne générée par l'IA avec insights, scores de santé et actions recommandées par l'agent Orchestrator.</p>
+            </div>
+        </div>
+        <div class="platform-card">
+            <div class="screenshot-placeholder"><span>Capture : Intégrations</span></div>
+            <div class="platform-card-content">
+                <h3>Sync GitHub &amp; Jira</h3>
+                <p>Synchronisation bidirectionnelle des tâches depuis vos outils existants. Import d'issues, suivi des dépendances, détection des blocages.</p>
+            </div>
+        </div>
+        <div class="platform-card">
+            <div class="screenshot-placeholder"><span>Capture : Simulations</span></div>
+            <div class="platform-card-content">
+                <h3>Simulations de décisions</h3>
+                <p>Générez 3 à 5 scénarios réalistes avec des scores de probabilité avant de prendre des décisions majeures. Des choix éclairés, pas de l'instinct.</p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -293,6 +240,9 @@
             <tr><td>Adaptation</td><td>Cycles fixes (sprints)</td><td>Continue, pilotée par les événements</td></tr>
             <tr><td>Mémoire</td><td>Documentation manuelle</td><td>Graphe de connaissances auto-généré</td></tr>
             <tr><td>Coordination</td><td>Rituels humains</td><td>Détectée par l'IA, décidée par l'humain</td></tr>
+            <tr><td>Gouvernance</td><td>Rôles flous</td><td>4 rôles définis avec pouvoirs de veto explicites</td></tr>
+            <tr><td>Éthique</td><td>Non adressée</td><td>8 principes non-négociables + Gardien Éthique</td></tr>
+            <tr><td>Métriques</td><td>Vélocité, burndown</td><td>11 métriques cognitives (système + humain + valeur)</td></tr>
             <tr><td>Temps en réunion</td><td>~15-20% du temps équipe</td><td>~9-10% du temps équipe</td></tr>
             <tr><td>Intégration IA</td><td>Outils ajoutés après coup</td><td>Partenaire cognitif natif</td></tr>
         </tbody>
@@ -311,7 +261,7 @@
             <p class="pricing-desc">Le framework SYNAPSE complet sur votre propre infrastructure. Contrôle total, souveraineté totale. Idéal pour les équipes techniques et les early adopters qui veulent explorer et personnaliser.</p>
             <ul class="pricing-features">
                 <li><span class="check">&#10003;</span> Spécifications complètes &amp; documentation</li>
-                <li><span class="check">&#10003;</span> Les 4 spécifications d'agents IA</li>
+                <li><span class="check">&#10003;</span> Les 7 spécifications d'agents IA</li>
                 <li><span class="check">&#10003;</span> Templates, guides &amp; kit de démarrage</li>
                 <li><span class="check">&#10003;</span> Déployez sur votre infra (Raspberry Pi au cloud)</li>
                 <li><span class="check">&#10003;</span> Utilisez n'importe quel LLM (Claude, GPT, Mistral, Llama)</li>
@@ -360,11 +310,11 @@
         <div class="status-done">
             <h3>&#10003; Réalisé</h3>
             <ul class="status-list">
-                <li><span class="check">&#10003;</span> 4 spécifications d'agents IA (fonctionnelles + garde-fous)</li>
+                <li><span class="check">&#10003;</span> 7 spécifications d'agents IA (fonctionnelles + garde-fous)</li>
                 <li><span class="check">&#10003;</span> 4 rôles humains avec pouvoirs de veto</li>
                 <li><span class="check">&#10003;</span> 3 boucles de gouvernance adaptatives</li>
                 <li><span class="check">&#10003;</span> 11 métriques cognitives définies</li>
-                <li><span class="check">&#10003;</span> Système de conformité éthique</li>
+                <li><span class="check">&#10003;</span> Charte éthique (8 principes + 8 droits des employés)</li>
                 <li><span class="check">&#10003;</span> Modèle d'autonomie graduée (4 niveaux)</li>
                 <li><span class="check">&#10003;</span> 100K+ mots de documentation</li>
                 <li><span class="check">&#10003;</span> Développement de la plateforme Cloud</li>
@@ -408,7 +358,7 @@
 <footer>
     <div class="footer-top">
         <div class="footer-brand">
-            <a href="#" class="nav-logo">SYNAPSE<span>.</span></a>
+            <a href="/fr/" class="nav-logo">SYNAPSE<span>.</span></a>
             <p>« Nous ne rendons pas l'ancien monde plus efficace. Nous construisons le suivant. »</p>
         </div>
         <div class="footer-cols">
